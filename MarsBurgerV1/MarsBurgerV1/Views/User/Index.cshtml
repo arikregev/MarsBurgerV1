@@ -1,0 +1,57 @@
+﻿@model IEnumerable<MarsBurgerV1.ViewModel.UserVM>
+@using MarsBurgerV1.Models
+@{
+    ViewBag.Title = "Index";
+}
+<h3>Manage Users</h3>
+<br/>
+<table class="table table-condensed table-hover">
+    <tr class="table-header">
+        <th>
+            @Html.DisplayNameFor(m => m.FirstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.LastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.BirthDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.Disable)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach(var i in Model){
+    <tr>
+        <td>
+            @Html.DisplayFor(m => i.FirstName)
+        </td>
+        <td>
+            @Html.DisplayFor(m => i.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(m => i.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(m => i.Phone)
+        </td>
+        <td>
+            @Html.DisplayFor(m => i.BirthDate)
+        </td>
+        <td>
+            @Html.CheckBoxFor(m => i.Disable, new { @class = "disabled" })
+        </td>
+        <td>
+            @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { UserId = i.Id})
+        </td>
+    </tr>
+    }
+
+</table>
