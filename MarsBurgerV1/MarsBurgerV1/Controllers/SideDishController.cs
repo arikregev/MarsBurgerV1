@@ -11,17 +11,17 @@ using System.Web.Mvc;
 namespace MarsBurgerV1.Controllers
 {
     [Authorize(Roles = SD.AdminUserRole)]
-    public class AddonController : Controller
+    public class SideDishController : Controller
     {
         private ApplicationDbContext db;
-        public AddonController()
+        public SideDishController()
         {
             db = new ApplicationDbContext();
         }
-        // GET: Addon
+        // GET: SideDish
         public ActionResult Index()
         {
-            return View(db.addons.ToList());
+            return View(db.sidedishes.ToList());
         }
 
         public ActionResult Create()
@@ -30,16 +30,16 @@ namespace MarsBurgerV1.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name")] Addon addon)
+        public ActionResult Create([Bind(Include = "Id,Name")] SideDish sd)
         {
             if (ModelState.IsValid)
             {
-                db.addons.Add(addon);
+                db.sidedishes.Add(sd);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(addon);
+            return View(sd);
         }
         public ActionResult Details(int? id)
         {
@@ -47,42 +47,42 @@ namespace MarsBurgerV1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Addon addon = db.addons.Find(id);
-            if (addon == null)
+            SideDish sd = db.sidedishes.Find(id);
+            if (sd == null)
             {
                 return HttpNotFound();
             }
-            return View(addon);
+            return View(sd);
         }
-        // GET: Addon/Edit/5
+        // GET: SideDish/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Addon addon = db.addons.Find(id);
-            if (addon == null)
+            SideDish sd = db.sidedishes.Find(id);
+            if (sd == null)
             {
                 return HttpNotFound();
             }
-            return View(addon);
+            return View(sd);
         }
 
-        // POST: Addon/Edit/5
+        // POST: SideDish/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name")] Addon addon)
+        public ActionResult Edit([Bind(Include = "Id,Name")] SideDish sd)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(addon).State = EntityState.Modified;
+                db.Entry(sd).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(addon);
+            return View(sd);
         }
         public ActionResult Delete(int? id)
         {
@@ -90,21 +90,21 @@ namespace MarsBurgerV1.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Addon addon = db.addons.Find(id);
-            if (addon == null)
+            SideDish sd = db.sidedishes.Find(id);
+            if (sd == null)
             {
                 return HttpNotFound();
             }
-            return View(addon);
+            return View(sd);
         }
 
-        // POST: Addon/Delete/5
+        // POST: SideDish/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Addon addon = db.addons.Find(id);
-            db.addons.Remove(addon);
+            SideDish sd = db.sidedishes.Find(id);
+            db.sidedishes.Remove(sd);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

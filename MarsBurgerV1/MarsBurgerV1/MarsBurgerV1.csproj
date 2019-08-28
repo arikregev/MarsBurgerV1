@@ -215,6 +215,7 @@
     <Compile Include="Controllers\DrinkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\SideDishController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extentions\DataRangeAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -370,6 +371,11 @@
     <Content Include="Views\Addon\Details.cshtml" />
     <Content Include="Views\Addon\Edit.cshtml" />
     <Content Include="Views\Addon\Index.cshtml" />
+    <Content Include="Views\SideDish\Create.cshtml" />
+    <Content Include="Views\SideDish\Delete.cshtml" />
+    <Content Include="Views\SideDish\Details.cshtml" />
+    <Content Include="Views\SideDish\Edit.cshtml" />
+    <Content Include="Views\SideDish\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
