@@ -21,6 +21,10 @@ namespace MarsBurgerV1.Models
             get
             {
                 var param = new StringBuilder(@"/");
+                if(AccountTypeId != null && AccountTypeId > 0)
+                {
+                    param.Append(String.Format("{0}", AccountTypeId));
+                }
                 if (UserId != null && UserId.Trim().Length > 0)
                 {
                     param.Append(String.Format("{0}", UserId));

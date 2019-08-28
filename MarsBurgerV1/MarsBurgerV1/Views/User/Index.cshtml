@@ -22,9 +22,6 @@
         <th>
             @Html.DisplayNameFor(m => m.BirthDate)
         </th>
-        <th>
-            @Html.DisplayNameFor(m => m.Disable)
-        </th>
         <th></th>
         <th></th>
     </tr>
@@ -46,10 +43,7 @@
             @Html.DisplayFor(m => i.BirthDate)
         </td>
         <td>
-            @Html.CheckBoxFor(m => i.Disable, new { @class = "disabled" })
-        </td>
-        <td>
-            @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { UserId = i.Id})
+            @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { UserId = i.Id })
         </td>
     </tr>
     }

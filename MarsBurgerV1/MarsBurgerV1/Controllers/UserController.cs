@@ -33,7 +33,7 @@ namespace MarsBurgerV1.Controllers
                             AccountTypes = (ICollection<AccountType>)db.accountTypes.ToList().Where(n => n.Id.Equals(u.AccountTypeId)),
                             Disable = u.Disable
                         };
-            var usersList = users.ToList();
+            var usersList = users.Where(m=>m.Disable == false).ToList();
             return View(usersList);
         }
 
@@ -58,7 +58,7 @@ namespace MarsBurgerV1.Controllers
                 Phone = user.PhoneNumber,
                 Disable = user.Disable
             };
-            return View();
+            return View(uvm);
         }
         //
         // Post -> Edit
@@ -95,7 +95,7 @@ namespace MarsBurgerV1.Controllers
                 userInDb.Disable = user.Disable;
             }
             db.SaveChanges();
-            return RedirectToAction("Index", "Users");
+            return RedirectToAction("Index", "User");
         }
         public ActionResult Details(string id)
         {

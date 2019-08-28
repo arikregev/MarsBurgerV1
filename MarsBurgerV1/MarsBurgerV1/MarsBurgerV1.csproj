@@ -353,6 +353,11 @@
     <Content Include="Views\User\Index.cshtml" />
     <Content Include="Views\Shared\View.cshtml" />
     <Content Include="Views\Shared\_TableButtonPartial.cshtml" />
+    <Content Include="Views\Shared\_IndividualButtonPartial.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\Shared\_Back2ListButtonPartial.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
