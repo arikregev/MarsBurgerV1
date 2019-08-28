@@ -10,29 +10,32 @@
             Action = "Edit",
             ButtonType = "btn-primary",
             Glyph = "pencil",
-            Text = "Edit User",
+            Text = "Edit",
             UserId = Model.UserId,
-            AccountTypeId = Model.AccountTypeId
+            AccountTypeId = Model.AccountTypeId,
+            DrinkId = Model.DrinkId
        })
         @Html.Partial("_IndividualButtonPartial",
        new IndividualButtonPartial
        {
-            Action = "Details",
-            ButtonType = "btn-success",
-            Glyph = "list",
-            Text = "Details",
-            UserId = Model.UserId,
-            AccountTypeId = Model.AccountTypeId
+           Action = "Details",
+           ButtonType = "btn-success",
+           Glyph = "list",
+           Text = "Details",
+           UserId = Model.UserId,
+           AccountTypeId = Model.AccountTypeId,
+           DrinkId = Model.DrinkId
        })
     @Html.Partial("_IndividualButtonPartial",
        new IndividualButtonPartial
        {
-            Action = "Delete",
-            ButtonType = "btn-danger",
-            Glyph = "trash",
-            Text = "Delete",
-            UserId = Model.UserId,
-            AccountTypeId = Model.AccountTypeId
+           Action = "Delete",
+           ButtonType = "btn-danger",
+           Glyph = "trash",
+           Text = "Delete",
+           UserId = Model.UserId,
+           AccountTypeId = Model.AccountTypeId,
+           DrinkId = Model.DrinkId
        })
     </div>
 </td>

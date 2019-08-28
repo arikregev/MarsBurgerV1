@@ -14,6 +14,7 @@ namespace MarsBurgerV1.Models
         public string Text { get; set; }
 
         public int? AccountTypeId { get; set; }
+        public int? DrinkId { get; set; }
         public string UserId { get; set; }
 
         public string ActionParameter
@@ -24,6 +25,10 @@ namespace MarsBurgerV1.Models
                 if(AccountTypeId != null && AccountTypeId > 0)
                 {
                     param.Append(String.Format("{0}", AccountTypeId));
+                }
+                if (DrinkId != null && DrinkId > 0)
+                {
+                    param.Append(String.Format("{0}", DrinkId));
                 }
                 if (UserId != null && UserId.Trim().Length > 0)
                 {

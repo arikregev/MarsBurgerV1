@@ -27,11 +27,11 @@ namespace MarsBurgerV1.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        DbSet<Order> orders { get; set; }
-        DbSet<Meal> meals { get; set; }
-        DbSet<Addon> addons { get; set; }
-        DbSet<SideDish> sidedishes { get; set; }
-        DbSet<Drink> drinks { set; get; }
+        public DbSet<Order> orders { get; set; }
+        public DbSet<Meal> meals { get; set; }
+        public DbSet<Addon> addons { get; set; }
+        public DbSet<SideDish> sidedishes { get; set; }
+        public DbSet<Drink> drinks { set; get; }
         public DbSet<AccountType> accountTypes { get; set; } 
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
