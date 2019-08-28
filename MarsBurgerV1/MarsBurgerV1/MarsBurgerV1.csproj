@@ -211,6 +211,7 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountTypeController.cs" />
+    <Compile Include="Controllers\AddonController.cs" />
     <Compile Include="Controllers\DrinkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -364,6 +365,11 @@
     <Content Include="Views\Drink\Details.cshtml" />
     <Content Include="Views\Drink\Edit.cshtml" />
     <Content Include="Views\Drink\Delete.cshtml" />
+    <Content Include="Views\Addon\Create.cshtml" />
+    <Content Include="Views\Addon\Delete.cshtml" />
+    <Content Include="Views\Addon\Details.cshtml" />
+    <Content Include="Views\Addon\Edit.cshtml" />
+    <Content Include="Views\Addon\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

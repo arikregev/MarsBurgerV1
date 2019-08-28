@@ -13,7 +13,8 @@
             Text = "Edit",
             UserId = Model.UserId,
             AccountTypeId = Model.AccountTypeId,
-            DrinkId = Model.DrinkId
+            DrinkId = Model.DrinkId,
+            AddonID = Model.AddonID
        })
         @Html.Partial("_IndividualButtonPartial",
        new IndividualButtonPartial
@@ -24,7 +25,8 @@
            Text = "Details",
            UserId = Model.UserId,
            AccountTypeId = Model.AccountTypeId,
-           DrinkId = Model.DrinkId
+           DrinkId = Model.DrinkId,
+           AddonID = Model.AddonID
        })
     @Html.Partial("_IndividualButtonPartial",
        new IndividualButtonPartial
@@ -35,7 +37,8 @@
            Text = "Delete",
            UserId = Model.UserId,
            AccountTypeId = Model.AccountTypeId,
-           DrinkId = Model.DrinkId
+           DrinkId = Model.DrinkId,
+           AddonID = Model.AddonID
        })
     </div>
 </td>
