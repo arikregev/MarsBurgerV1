@@ -7,9 +7,11 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MarsBurgerV1.Models;
+using MarsBurgerV1.Utility;
 
 namespace MarsBurgerV1.Controllers
 {
+    [Authorize(Roles = SD.AdminUserRole)]
     public class AccountTypeController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

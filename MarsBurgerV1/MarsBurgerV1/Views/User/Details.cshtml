@@ -1,4 +1,5 @@
-﻿@model MarsBurgerV1.ViewModel.UserVM
+﻿@using MarsBurgerV1.Models
+@model MarsBurgerV1.ViewModel.UserVM
 @{ 
     ViewBag.Title = "Details";
 }
@@ -45,6 +46,26 @@
                 </div>
                 <div class="col-md-10">
                     @Html.TextBoxFor(m => m.BirthDate, "{0: dd MM yyyy}", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="row" style="padding-bottom:5px; padding-top:5px;">
+                <div class="col-md-2">
+                    @{
+                        ApplicationDbContext db = ApplicationDbContext.Create();
+                        var acctTypes = (from u in db.accountTypes select u).Where(s => s.Id.Equals(Model.AccountTypesId)).ToList();
+                        if (acctTypes != null)
+                        {
+                            @Html.Label("Account Type", htmlAttributes: new { @class = "contol-label" })
+                        }
+                    }
+                </div>
+                <div class="col-md-10">
+                    @{
+                        if (acctTypes != null)
+                        {
+                            @Html.Label(acctTypes[0].Name, htmlAttributes: new { @class = "contol-label" })
+                        }
+                    }
                 </div>
             </div>
         </fieldset>

@@ -1,5 +1,8 @@
 ﻿using MarsBurgerV1.Models;
+using MarsBurgerV1.Utility;
 using MarsBurgerV1.ViewModel;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +12,11 @@ using System.Web.Mvc;
 
 namespace MarsBurgerV1.Controllers
 {
+    [Authorize(Roles = SD.AdminUserRole)]
     public class UserController : Controller
     {
         private ApplicationDbContext db;
+
         public UserController()
         {
             db = ApplicationDbContext.Create();
@@ -66,6 +71,9 @@ namespace MarsBurgerV1.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(UserVM user)
         {
+            var _context = new ApplicationDbContext();
+            var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_context));
+            var accountTypes = db.accountTypes.Where(s => s.Name.Equals("admin".ToLower())).ToList();
             if (!ModelState.IsValid)
             {
                 UserVM uvm = new UserVM
@@ -80,6 +88,17 @@ namespace MarsBurgerV1.Controllers
                     Phone = user.Phone,
                     Disable = user.Disable
                 };
+                var userRoles = UserManager.GetRoles(uvm.Id).ToList();
+                if (!userRoles.Contains(SD.AdminUserRole) && accountTypes != null && accountTypes.Count > 0 &&
+                        uvm.AccountTypesId == accountTypes[0].Id)
+                {
+                    UserManager.AddToRole(uvm.Id, SD.AdminUserRole);
+                }
+                if (userRoles.Contains(SD.AdminUserRole) && accountTypes != null && accountTypes.Count > 0 &&
+                        uvm.AccountTypesId != accountTypes[0].Id)
+                {
+                    UserManager.RemoveFromRole(uvm.Id, SD.AdminUserRole);
+                }
                 return View("Edit", uvm);
             }
             else
@@ -93,6 +112,17 @@ namespace MarsBurgerV1.Controllers
                 userInDb.AccountTypeId = user.AccountTypesId;
                 userInDb.PhoneNumber = user.Phone;
                 userInDb.Disable = user.Disable;
+                var userRoles = UserManager.GetRoles(userInDb.Id).ToList();
+                if (!userRoles.Contains(SD.AdminUserRole) && accountTypes != null && accountTypes.Count > 0 &&
+                        userInDb.AccountTypeId == accountTypes[0].Id)
+                {
+                    UserManager.AddToRole(userInDb.Id, SD.AdminUserRole);
+                }
+                if (userRoles.Contains(SD.AdminUserRole) && accountTypes != null && accountTypes.Count > 0 &&
+                        userInDb.AccountTypeId != accountTypes[0].Id)
+                {
+                    UserManager.RemoveFromRole(userInDb.Id, SD.AdminUserRole);
+                }
             }
             db.SaveChanges();
             return RedirectToAction("Index", "User");
