@@ -150,7 +150,19 @@ namespace MarsBurgerV1.Controllers
             return View(newUser);
             }
         }
-
+        private bool IsAccountTypeExist(string acct)
+        {
+            using(var db = ApplicationDbContext.Create())
+            {
+                var acctlst = db.accountTypes.ToList();
+                foreach (var a in acctlst)
+                {
+                    if (a.Name.Equals(acct))
+                        return true;
+                }
+            }
+            return false;
+        }
         //
         // POST: /Account/Register
         [HttpPost]
@@ -177,6 +189,12 @@ namespace MarsBurgerV1.Controllers
                         var numOfUsers = db.Users.ToList().Count();
                         if (numOfUsers == 0)
                         {
+                            if(db.accountTypes.Count() == 0)///?
+                            {
+                                db.accountTypes.Add(new AccountType { Name = SD.AdminUserRole });
+                                db.accountTypes.Add(new AccountType { Name = SD.EndUserRole });
+                                db.SaveChanges();
+                            }
                             var accountTypes = db.accountTypes.ToList().Where(n => n.Name.ToLower().Equals("admin")).ToList();
                             user.AccountTypeId = accountTypes[0].Id;
                             var roleStore = new RoleStore<IdentityRole>(new ApplicationDbContext());

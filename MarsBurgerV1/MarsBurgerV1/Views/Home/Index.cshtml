@@ -1,16 +1,39 @@
-﻿@{
+﻿@model IEnumerable<MarsBurgerV1.ViewModel.ThumbnailBoxVM>
+@{
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <br /><br /><br />
-    <video autoplay="autoplay" width="1000" height="450" and loop>
-        <source src="~/Media/Burger.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-    </video>
+@using (Html.BeginForm("Index", "Home", FormMethod.Get))
+{
+
+    <div class="jumbotron">
+        <br /><br /><br />
+        <video autoplay="autoplay" width="1000" height="450" and loop>
+            <source src="~/Media/Burger.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+        </video>
+    </div>
+    <div class="row">
+        <div class="pull-right" style="padding-right:15px;">
+            <button type="submit" value="Search" class="btn btn-sm btn-primary">
+                <span class="glyphicon glyphicon-search"></span>
+                <span>Search</span>
+            </button>
+        </div>
+        <div class="pull-right">
+            @Html.Editor("search", new { htmlattributes = new { @class = "form-control input-sm" } })
+        </div>
+    </div>
+    <br />
+}
+<div class="row">
+    @foreach (var a in Model)
+    {
+        @Html.Partial("_ThumbnailAreaPartial", a);
+    }
 </div>
 
-<div class="row">
+<!--<div class="row">
     <div class="col-md-4">
         <h2>Getting started</h2>
         <p>
@@ -30,4 +53,4 @@
         <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
         <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
-</div>
+</div>-->

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<MarsBurgerV1.Models.Meal>
+@using MarsBurgerV1.Models
+@{
+    ViewBag.Title = "View";
+}
+
+<hr />
+<h4>Manage Meals Menu</h4>
+<a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Create")">
+    <span class="glyphicon glyphicon-plus"></span>
+    <span>Create New</span>
+</a>
+<br />
+<br />
+<table class="table table-condensed table-hover">
+    <tr class="table-header">
+        <th>
+            @Html.DisplayNameFor(m => m.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => m.Price)
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+    @foreach (var i in Model)
+    {
+    <tr>
+        <td>
+            @Html.DisplayFor(m => i.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(m => i.Price)
+        </td>
+        <td>
+            @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { SideDishId = i.Id })
+        </td>
+    </tr>
+    }
+
+</table>
+
+

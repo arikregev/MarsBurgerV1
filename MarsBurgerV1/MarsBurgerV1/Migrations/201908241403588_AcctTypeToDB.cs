@@ -15,7 +15,9 @@ namespace MarsBurgerV1.Migrations
                         Name = c.String(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
-            
+
+            //Sql("INSERT INTO [dbo].[AccountType](Name) VALUES('Admin')");
+            //Sql("INSERT INTO [dbo].[AccountType](Name) VALUES('Customer')");
         }
         
         public override void Down()

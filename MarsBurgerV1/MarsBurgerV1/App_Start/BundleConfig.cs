@@ -22,10 +22,13 @@ namespace MarsBurgerV1
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js",
                      "~/Scripts/respond.js",
+                     "~/Scripts/typeahead.bundle.min.js",
                      "~/Scripts/AdminMenu.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/thumbnail.css",
+                      "~/Content/typeahead.css",
                       "~/Content/site.css"));
         }
     }
