@@ -15,6 +15,14 @@
             @Html.DisplayFor(model => model.Name)
         </dd>
     </dl>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
 </div>
 <p>
     <a type="button" class="btn btn-sm btn-primary" href="@Url.Action("Edit", new { id = Model.Id })">

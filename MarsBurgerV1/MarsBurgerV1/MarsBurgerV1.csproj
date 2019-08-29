@@ -237,6 +237,14 @@
     <Compile Include="Migrations\201908261509494_addFieldstoUser.Designer.cs">
       <DependentUpon>201908261509494_addFieldstoUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908290532119_AddPrice2Addon.cs" />
+    <Compile Include="Migrations\201908290532119_AddPrice2Addon.Designer.cs">
+      <DependentUpon>201908290532119_AddPrice2Addon.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908290549521_DrinkAndAddon.cs" />
+    <Compile Include="Migrations\201908290549521_DrinkAndAddon.Designer.cs">
+      <DependentUpon>201908290549521_DrinkAndAddon.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -398,6 +406,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908261509494_addFieldstoUser.resx">
       <DependentUpon>201908261509494_addFieldstoUser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908290532119_AddPrice2Addon.resx">
+      <DependentUpon>201908290532119_AddPrice2Addon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908290549521_DrinkAndAddon.resx">
+      <DependentUpon>201908290549521_DrinkAndAddon.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

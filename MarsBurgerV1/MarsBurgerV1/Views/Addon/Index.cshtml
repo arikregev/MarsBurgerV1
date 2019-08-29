@@ -17,19 +17,25 @@
         <th>
             @Html.DisplayNameFor(m => m.Name)
         </th>
+        <th>
+            @Html.DisplayNameFor(m => m.Price)
+        </th>
         <th></th>
         <th></th>
     </tr>
     @foreach (var i in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(m => i.Name)
-            </td>
-            <td>
-                @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { AddonID = i.Id })
-            </td>
-        </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(m => i.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(m => i.Price)
+        </td>
+        <td>
+            @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { AddonID = i.Id })
+        </td>
+    </tr>
     }
 
 </table>
