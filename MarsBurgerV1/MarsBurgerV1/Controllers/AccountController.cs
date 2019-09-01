@@ -193,7 +193,7 @@ namespace MarsBurgerV1.Controllers
                             db.accountTypes.Add(new AccountType { Name = SD.EndUserRole });
                             db.SaveChanges();
                         }
-                        if (numOfUsers == 0)
+                        if (numOfUsers == 1)
                         {
                             var accountTypes = db.accountTypes.ToList().Where(n => n.Name.ToLower().Equals("admin")).ToList();
                             user.AccountTypeId = accountTypes[0].Id;
