@@ -6,14 +6,13 @@ using System.Web;
 
 namespace MarsBurgerV1.Models
 {
-    public class Order
+    public class OrderMeal
     {
         [Required]
         public int Id { get; set; }
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
         [Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0: dd MMM yyyy")]
-        public DateTime LastUpdate { get; set; }
+        public int MealId { get; set; }
+        [Required]
+        public virtual ICollection<Addon> Addons { get; set; }
     }
 }

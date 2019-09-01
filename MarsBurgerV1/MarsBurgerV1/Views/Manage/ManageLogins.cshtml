@@ -1,4 +1,5 @@
 ﻿@model MarsBurgerV1.Models.ManageLoginsViewModel
+@using MarsBurgerV1.Utility
 @using Microsoft.Owin.Security
 @{
     ViewBag.Title = "Manage your external logins";
@@ -60,7 +61,7 @@
                 <p>
                     @foreach (AuthenticationDescription p in Model.OtherLogins)
                     {
-                        <button type="submit" class="btn btn-default" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
+                        <button type="submit" class="btn btn-@SD.GetColorforLogin(p.Caption)" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account">@p.AuthenticationType</button>
                     }
                 </p>
                 </div>

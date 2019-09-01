@@ -216,6 +216,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MealController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\SideDishController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extentions\DataRangeAttribute.cs" />
@@ -247,17 +248,25 @@
     <Compile Include="Migrations\201908290549521_DrinkAndAddon.Designer.cs">
       <DependentUpon>201908290549521_DrinkAndAddon.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201908311701396_OrdersWnewOrderModels.cs" />
+    <Compile Include="Migrations\201908311701396_OrdersWnewOrderModels.Designer.cs">
+      <DependentUpon>201908311701396_OrdersWnewOrderModels.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Addon.cs" />
+    <Compile Include="Models\Branches.cs" />
     <Compile Include="Models\IndividualButtonPartial.cs" />
     <Compile Include="Models\Drink.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Meal.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderItem.cs" />
+    <Compile Include="Models\OrderMeal.cs" />
     <Compile Include="Models\SideDish.cs" />
+    <Compile Include="Models\SubmitedOrder.cs" />
     <Compile Include="Models\Thumbnail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -306,6 +315,8 @@
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -402,6 +413,12 @@
     <Content Include="Views\Meal\Details.cshtml" />
     <Content Include="Views\Meal\Edit.cshtml" />
     <Content Include="Views\Meal\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Orders\_AddItemPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -430,6 +447,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908290549521_DrinkAndAddon.resx">
       <DependentUpon>201908290549521_DrinkAndAddon.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908311701396_OrdersWnewOrderModels.resx">
+      <DependentUpon>201908311701396_OrdersWnewOrderModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
