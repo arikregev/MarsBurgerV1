@@ -219,7 +219,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MealController.cs" />
-    <Compile Include="Controllers\OrdersController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SideDishController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extentions\DataRangeAttribute.cs" />
@@ -255,6 +255,10 @@
     <Compile Include="Migrations\201908311701396_OrdersWnewOrderModels.Designer.cs">
       <DependentUpon>201908311701396_OrdersWnewOrderModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909031555208_RemoveOrders.cs" />
+    <Compile Include="Migrations\201909031555208_RemoveOrders.Designer.cs">
+      <DependentUpon>201909031555208_RemoveOrders.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -266,8 +270,6 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Meal.cs" />
     <Compile Include="Models\Order.cs" />
-    <Compile Include="Models\OrderItem.cs" />
-    <Compile Include="Models\OrderMeal.cs" />
     <Compile Include="Models\SideDish.cs" />
     <Compile Include="Models\SubmitedOrder.cs" />
     <Compile Include="Models\Thumbnail.cs" />
@@ -417,12 +419,9 @@
     <Content Include="Views\Meal\Details.cshtml" />
     <Content Include="Views\Meal\Edit.cshtml" />
     <Content Include="Views\Meal\Index.cshtml" />
-    <Content Include="Views\Orders\Create.cshtml" />
-    <Content Include="Views\Orders\Delete.cshtml" />
-    <Content Include="Views\Orders\Details.cshtml" />
-    <Content Include="Views\Orders\Edit.cshtml" />
-    <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
+    <Content Include="Views\Order\Create.cshtml" />
+    <Content Include="Views\Order\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -454,6 +453,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908311701396_OrdersWnewOrderModels.resx">
       <DependentUpon>201908311701396_OrdersWnewOrderModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909031555208_RemoveOrders.resx">
+      <DependentUpon>201909031555208_RemoveOrders.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

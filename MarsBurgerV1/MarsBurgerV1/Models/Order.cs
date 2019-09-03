@@ -10,7 +10,13 @@ namespace MarsBurgerV1.Models
     {
         [Required]
         public int Id { get; set; }
-        public virtual ICollection<OrderItem> OrderItems { get; set; }
+        [Required]
+        public int UserId { get; set; }
+        
+        [Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0: dd MMM yyyy")]
+        public DateTime CreationTime { get; set; }
         [Required]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0: dd MMM yyyy")]

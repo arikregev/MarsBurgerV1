@@ -4,20 +4,20 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using MarsBurgerV1.Models;
 using MarsBurgerV1.ViewModel;
+using Microsoft.AspNet.Identity;
 
 namespace MarsBurgerV1.Controllers
 {
-    public class OrdersController : Controller
+    public class OrderController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Orders
         public ActionResult Index()
         {
-            
+
             return View();
         }
 
@@ -35,10 +35,7 @@ namespace MarsBurgerV1.Controllers
             }
             return View(order);
         }
-        public ActionResult AddMoreItemsViews(int? offset, int? count)
-        {
-            return PartialView(new OrderItem());
-        }
+      
         // GET: Orders/Create
         public ActionResult Create()
         {
@@ -48,7 +45,7 @@ namespace MarsBurgerV1.Controllers
                              Id = m.Id,
                              Name = m.Name,
                              Price = m.Price,
-                             ItemType = "Meal",
+                             Type = ItemVM.ItemType.Meal,
                              ImageURL = m.ImageUrl,
                              Quantity = 0
                          }).ToList();
@@ -58,7 +55,7 @@ namespace MarsBurgerV1.Controllers
                               Id = d.Id,
                               Name = d.Name,
                               Price = d.Price,
-                              ItemType = "Drink",
+                              Type = ItemVM.ItemType.Drink,
                               Quantity = 0
                           }).ToList();
             var sidedishes = (from s in db.sidedishes
@@ -67,7 +64,7 @@ namespace MarsBurgerV1.Controllers
                                   Id = s.Id,
                                   Name = s.Name,
                                   Price = s.Price,
-                                  ItemType = "SideDish",
+                                  Type = ItemVM.ItemType.SideDish,
                                   Quantity = 0
                               }).ToList();
             var addons = (from a in db.addons
@@ -76,7 +73,7 @@ namespace MarsBurgerV1.Controllers
                               Id = a.Id,
                               Name = a.Name,
                               Price = a.Price,
-                              ItemType = "Addon",
+                              Type = ItemVM.ItemType.Addon,
                               Quantity = 0
                           }).ToList();
             List<ItemVM> items = new List<ItemVM>();
@@ -84,8 +81,6 @@ namespace MarsBurgerV1.Controllers
             items.AddRange(drinks);
             items.AddRange(sidedishes);
             items.AddRange(addons);
-            int _id = 1;
-            foreach (var i in items) { i.Id = _id++; }
             return View(items.ToList());
         }
 
@@ -94,15 +89,20 @@ namespace MarsBurgerV1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IEnumerable<ItemVM> items = null)
+        public ActionResult Create(List<ItemVM> items = null)
         {
             if (ModelState.IsValid)
             {
+                var userID = User.Identity.GetUserId();
+                items.RemoveAll(m => m.Quantity.Equals(0));
+                if(userID != null)
+                {
+
+                }
                 //db.orders.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
             return View();
         }
 

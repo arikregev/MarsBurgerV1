@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace MarsBurgerV1.ViewModel
 {
@@ -16,11 +17,17 @@ namespace MarsBurgerV1.ViewModel
         [Required]
         [DataType(DataType.Currency)]
         public double Price { get; set; }
-        [Required]
-        public string ItemType { get; set; }
+        public ItemType Type {get; set;}
+        public enum ItemType {
+            Meal,
+            SideDish,
+            Drink,
+            Addon
+        }
         
         public string ImageURL { get; set; }
         [Required]
+        //[AllowHtml]
         public int Quantity { get; set; }
     }
 }

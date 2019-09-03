@@ -33,8 +33,6 @@ namespace MarsBurgerV1.Models
         public DbSet<SideDish> sidedishes { get; set; }
         public DbSet<Drink> drinks { set; get; }
         public DbSet<AccountType> accountTypes { get; set; }
-        public DbSet<OrderItem> OrderItems { get; set; }
-        public DbSet<OrderMeal> OrderMeals { get; set; }
         public DbSet<SubmitedOrder> SubmitedOrders { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
