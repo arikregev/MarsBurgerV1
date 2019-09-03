@@ -7,17 +7,18 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MarsBurgerV1.Models;
+using MarsBurgerV1.ViewModel;
 
 namespace MarsBurgerV1.Controllers
 {
     public class OrdersController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Orders
         public ActionResult Index()
         {
-            return View(db.orders.ToList());
+            
+            return View();
         }
 
         // GET: Orders/Details/5
@@ -41,7 +42,51 @@ namespace MarsBurgerV1.Controllers
         // GET: Orders/Create
         public ActionResult Create()
         {
-            return View();
+            var meals = (from m in db.meals
+                         select new ItemVM
+                         {
+                             Id = m.Id,
+                             Name = m.Name,
+                             Price = m.Price,
+                             ItemType = "Meal",
+                             ImageURL = m.ImageUrl,
+                             Quantity = 0
+                         }).ToList();
+            var drinks = (from d in db.drinks
+                          select new ItemVM
+                          {
+                              Id = d.Id,
+                              Name = d.Name,
+                              Price = d.Price,
+                              ItemType = "Drink",
+                              Quantity = 0
+                          }).ToList();
+            var sidedishes = (from s in db.sidedishes
+                              select new ItemVM
+                              {
+                                  Id = s.Id,
+                                  Name = s.Name,
+                                  Price = s.Price,
+                                  ItemType = "SideDish",
+                                  Quantity = 0
+                              }).ToList();
+            var addons = (from a in db.addons
+                          select new ItemVM
+                          {
+                              Id = a.Id,
+                              Name = a.Name,
+                              Price = a.Price,
+                              ItemType = "Addon",
+                              Quantity = 0
+                          }).ToList();
+            List<ItemVM> items = new List<ItemVM>();
+            items.AddRange(meals);
+            items.AddRange(drinks);
+            items.AddRange(sidedishes);
+            items.AddRange(addons);
+            int _id = 1;
+            foreach (var i in items) { i.Id = _id++; }
+            return View(items.ToList());
         }
 
         // POST: Orders/Create
@@ -49,16 +94,16 @@ namespace MarsBurgerV1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,LastUpdate")] Order order)
+        public ActionResult Create(IEnumerable<ItemVM> items = null)
         {
             if (ModelState.IsValid)
             {
-                db.orders.Add(order);
+                //db.orders.Add(order);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(order);
+            return View();
         }
 
         // GET: Orders/Edit/5
