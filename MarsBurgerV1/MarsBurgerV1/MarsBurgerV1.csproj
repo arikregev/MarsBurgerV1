@@ -259,6 +259,14 @@
     <Compile Include="Migrations\201909031555208_RemoveOrders.Designer.cs">
       <DependentUpon>201909031555208_RemoveOrders.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909031932326_RemoveSubOrderAddOrderItem.cs" />
+    <Compile Include="Migrations\201909031932326_RemoveSubOrderAddOrderItem.Designer.cs">
+      <DependentUpon>201909031932326_RemoveSubOrderAddOrderItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909031934076_RemoveSubOrderAddOrderItem2.cs" />
+    <Compile Include="Migrations\201909031934076_RemoveSubOrderAddOrderItem2.Designer.cs">
+      <DependentUpon>201909031934076_RemoveSubOrderAddOrderItem2.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -270,13 +278,14 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Meal.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\SideDish.cs" />
-    <Compile Include="Models\SubmitedOrder.cs" />
     <Compile Include="Models\Thumbnail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Utility\SD.cs" />
     <Compile Include="ViewModel\ItemVM.cs" />
+    <Compile Include="ViewModel\OrderVM.cs" />
     <Compile Include="ViewModel\ThumbnailBoxVM.cs" />
     <Compile Include="ViewModel\UserVM.cs" />
   </ItemGroup>
@@ -456,6 +465,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909031555208_RemoveOrders.resx">
       <DependentUpon>201909031555208_RemoveOrders.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909031932326_RemoveSubOrderAddOrderItem.resx">
+      <DependentUpon>201909031932326_RemoveSubOrderAddOrderItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909031934076_RemoveSubOrderAddOrderItem2.resx">
+      <DependentUpon>201909031934076_RemoveSubOrderAddOrderItem2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

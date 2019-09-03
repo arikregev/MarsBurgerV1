@@ -4,24 +4,46 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using MarsBurgerV1.Models;
+using MarsBurgerV1.Utility;
 using MarsBurgerV1.ViewModel;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace MarsBurgerV1.Controllers
 {
+    [Authorize]
     public class OrderController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-        // GET: Orders
+       
+        // GET: Order
         public ActionResult Index()
         {
+            var list = (from o in db.orders
+                       join u in db.Users on o.UserId equals u.Id
+                       select new OrderVM
+                       {
+                           UserID = o.UserId,
+                           UserName = u.UserName,
+                           OrderID = o.Id,
+                           CreationTime = o.CreationTime,
+                           LastUpdate = o.LastUpdate,
+                           OrderStatusID = o.OrderStatusID,
+                           Status = o.Status
+                       }).ToList();
 
-            return View();
+            string user = User.Identity.GetUserId();
+            if (User.IsInRole(SD.AdminUserRole))
+            {
+                return View(list);
+            }
+            return View(list.Where(u=>u.UserID.Equals(user)).ToList());
         }
-
-        // GET: Orders/Details/5
+        
+        // GET: Order/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -36,7 +58,7 @@ namespace MarsBurgerV1.Controllers
             return View(order);
         }
       
-        // GET: Orders/Create
+        // GET: Order/Create
         public ActionResult Create()
         {
             var meals = (from m in db.meals
@@ -45,7 +67,7 @@ namespace MarsBurgerV1.Controllers
                              Id = m.Id,
                              Name = m.Name,
                              Price = m.Price,
-                             Type = ItemVM.ItemType.Meal,
+                             Type = SD.ItemType.Meal,
                              ImageURL = m.ImageUrl,
                              Quantity = 0
                          }).ToList();
@@ -55,7 +77,7 @@ namespace MarsBurgerV1.Controllers
                               Id = d.Id,
                               Name = d.Name,
                               Price = d.Price,
-                              Type = ItemVM.ItemType.Drink,
+                              Type = SD.ItemType.Drink,
                               Quantity = 0
                           }).ToList();
             var sidedishes = (from s in db.sidedishes
@@ -64,7 +86,7 @@ namespace MarsBurgerV1.Controllers
                                   Id = s.Id,
                                   Name = s.Name,
                                   Price = s.Price,
-                                  Type = ItemVM.ItemType.SideDish,
+                                  Type = SD.ItemType.SideDish,
                                   Quantity = 0
                               }).ToList();
             var addons = (from a in db.addons
@@ -73,7 +95,7 @@ namespace MarsBurgerV1.Controllers
                               Id = a.Id,
                               Name = a.Name,
                               Price = a.Price,
-                              Type = ItemVM.ItemType.Addon,
+                              Type = SD.ItemType.Addon,
                               Quantity = 0
                           }).ToList();
             List<ItemVM> items = new List<ItemVM>();
@@ -83,10 +105,7 @@ namespace MarsBurgerV1.Controllers
             items.AddRange(addons);
             return View(items.ToList());
         }
-
-        // POST: Orders/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Order/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(List<ItemVM> items = null)
@@ -97,16 +116,36 @@ namespace MarsBurgerV1.Controllers
                 items.RemoveAll(m => m.Quantity.Equals(0));
                 if(userID != null)
                 {
-
+                    Order order = new Order
+                    {
+                        UserId = userID,
+                        CreationTime = DateTime.Now,
+                        LastUpdate = DateTime.Now,
+                        Status = SD.OrderStatus.OrderReceived,
+                        OrderStatusID = (int)SD.OrderStatus.OrderReceived
+                    };
+                    db.orders.Add(order);
+                    db.SaveChanges();
+                    var lastOrderId = (from o in db.orders
+                                       select o).ToList().Last().Id;
+                    foreach (var i in items)
+                    {
+                        OrderItem o = new OrderItem
+                        {
+                            ItemID = i.Type,
+                            ItemTypeId = (int)i.Type,
+                            OrderId = lastOrderId
+                        };
+                        db.OrderItems.Add(o);
+                    }
+                    db.SaveChanges();
                 }
-                //db.orders.Add(order);
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View();
         }
 
-        // GET: Orders/Edit/5
+        // GET: Order/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -121,7 +160,7 @@ namespace MarsBurgerV1.Controllers
             return View(order);
         }
 
-        // POST: Orders/Edit/5
+        // POST: Order/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -137,7 +176,7 @@ namespace MarsBurgerV1.Controllers
             return View(order);
         }
 
-        // GET: Orders/Delete/5
+        // GET: Order/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -152,7 +191,7 @@ namespace MarsBurgerV1.Controllers
             return View(order);
         }
 
-        // POST: Orders/Delete/5
+        // POST: Order/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

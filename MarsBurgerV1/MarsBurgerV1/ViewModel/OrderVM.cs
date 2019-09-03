@@ -5,17 +5,13 @@ using System.Linq;
 using System.Web;
 using static MarsBurgerV1.Utility.SD;
 
-namespace MarsBurgerV1.Models
+namespace MarsBurgerV1.ViewModel
 {
-    public class Order
+    public class OrderVM
     {
-        [Required]
-        [Display(Name = "Order ID")]
-        public int Id { get; set; }
-        [Required]
-        [Display(Name = "User ID")]
-        public string UserId { get; set; }
-        
+        public int OrderID { get; set; }
+        public string UserID { get; set; }
+        public string UserName { get; set; }
         [Required]
         [Display(Name = "Creation Time")]
         [DataType(DataType.Date)]
@@ -41,6 +37,5 @@ namespace MarsBurgerV1.Models
         [Required]
         [EnumDataType(typeof(OrderStatus))]
         public OrderStatus Status { get; set; }
-        
     }
 }

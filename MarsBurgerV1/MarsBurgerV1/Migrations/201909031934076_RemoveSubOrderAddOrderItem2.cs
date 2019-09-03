@@ -1,0 +1,28 @@
+namespace MarsBurgerV1.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class RemoveSubOrderAddOrderItem2 : DbMigration
+    {
+        public override void Up()
+        {
+            CreateTable(
+                "dbo.OrderItems",
+                c => new
+                    {
+                        Id = c.Int(nullable: false, identity: true),
+                        OrderId = c.Int(nullable: false),
+                        ItemTypeId = c.Int(nullable: false),
+                        ItemID = c.Int(nullable: false),
+                    })
+                .PrimaryKey(t => t.Id);
+            
+        }
+        
+        public override void Down()
+        {
+            DropTable("dbo.OrderItems");
+        }
+    }
+}

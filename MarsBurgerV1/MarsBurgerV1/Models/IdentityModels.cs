@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -12,6 +13,8 @@ namespace MarsBurgerV1.Models
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
         public bool Disable { get; set; }
         public int AccountTypeId { get; set; }
@@ -33,7 +36,7 @@ namespace MarsBurgerV1.Models
         public DbSet<SideDish> sidedishes { get; set; }
         public DbSet<Drink> drinks { set; get; }
         public DbSet<AccountType> accountTypes { get; set; }
-        public DbSet<SubmitedOrder> SubmitedOrders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
