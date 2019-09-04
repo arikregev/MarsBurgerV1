@@ -271,6 +271,14 @@
     <Compile Include="Migrations\201909041106166_addPhoto2ALL.Designer.cs">
       <DependentUpon>201909041106166_addPhoto2ALL.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909042029208_addQuantity2OrderItem.cs" />
+    <Compile Include="Migrations\201909042029208_addQuantity2OrderItem.Designer.cs">
+      <DependentUpon>201909042029208_addQuantity2OrderItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909042047074_addItemOrigID2OrderItem.cs" />
+    <Compile Include="Migrations\201909042047074_addItemOrigID2OrderItem.Designer.cs">
+      <DependentUpon>201909042047074_addItemOrigID2OrderItem.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -283,6 +291,7 @@
     <Compile Include="Models\Meal.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderButtonPartial.cs" />
+    <Compile Include="Models\OrderDetailsPartial.cs" />
     <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\SideDish.cs" />
     <Compile Include="Models\Thumbnail.cs" />
@@ -441,6 +450,9 @@
     <Content Include="Views\Shared\_OrderButtonPartial.cshtml" />
     <Content Include="Views\Shared\_OrderTableButtonPartial.cshtml" />
     <Content Include="Views\Order\Edit.cshtml" />
+    <Content Include="Views\Order\Details.cshtml" />
+    <Content Include="Views\Shared\_OrderDetailsPartial.cshtml" />
+    <Content Include="Views\Shared\_OrderDetailCreatorPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -484,6 +496,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909041106166_addPhoto2ALL.resx">
       <DependentUpon>201909041106166_addPhoto2ALL.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909042029208_addQuantity2OrderItem.resx">
+      <DependentUpon>201909042029208_addQuantity2OrderItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909042047074_addItemOrigID2OrderItem.resx">
+      <DependentUpon>201909042047074_addItemOrigID2OrderItem.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

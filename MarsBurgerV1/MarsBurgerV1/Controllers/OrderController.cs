@@ -52,15 +52,25 @@ namespace MarsBurgerV1.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Order order = db.orders.Find(id);
+            var uid = db.Users.ToList().Where(m => m.Id.Equals(order.UserId)).Single().UserName;
+            OrderVM o = new OrderVM
+            {
+                UserID = order.UserId,
+                UserName = uid,
+                OrderID = order.Id,
+                CreationTime = order.CreationTime,
+                LastUpdate = order.LastUpdate,
+                OrderStatusID = order.OrderStatusID,
+                //OrderStatuses = Enum.GetValues(typeof(SD.OrderStatus)).Cast<SD.OrderStatus>().ToList(),
+                Status = order.Status
+            };
             if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+            return View(o);
         }
-      
-        // GET: Order/Create
-        public ActionResult Create()
+         public IEnumerable<ItemVM> GetAllItems()
         {
             var meals = (from m in db.meals
                          select new ItemVM
@@ -107,7 +117,12 @@ namespace MarsBurgerV1.Controllers
             items.AddRange(drinks);
             items.AddRange(sidedishes);
             items.AddRange(addons);
-            return View(items.ToList());
+            return items;
+        }
+        // GET: Order/Create
+        public ActionResult Create()
+        { 
+            return View(GetAllItems().ToList());
         }
         // POST: Order/Create
         [HttpPost]
@@ -138,7 +153,9 @@ namespace MarsBurgerV1.Controllers
                         {
                             ItemID = i.Type,
                             ItemTypeId = (int)i.Type,
-                            OrderId = lastOrderId
+                            OrderId = lastOrderId,
+                            Quantity = i.Quantity,
+                            ItemOrigID = i.Id
                         };
                         db.OrderItems.Add(o);
                     }
@@ -176,7 +193,6 @@ namespace MarsBurgerV1.Controllers
 
             return View(o);
         }
-
         // POST: Order/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
@@ -221,7 +237,22 @@ namespace MarsBurgerV1.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
+        [ChildActionOnly]
+        public PartialViewResult GetOrderedItems(int? orderid, string userid = null)
+        {
+            if(orderid > 0 && userid != null && this.User.Identity.GetUserId().Equals(userid))
+            {
+                var allItems = GetAllItems().ToList();
+                var uo = db.OrderItems.Where(m => m.OrderId == orderid).ToList();
+                foreach(var i in uo)
+                {
+                    allItems.Find(m => m.Type == (SD.ItemType)i.ItemTypeId && m.Id == i.ItemOrigID).Quantity = i.Quantity;
+                }
+                allItems.RemoveAll(m => m.Quantity == 0);
+                return PartialView("_OrderDetailCreatorPartial", allItems);
+            }
+            return PartialView();
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

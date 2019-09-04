@@ -1,18 +1,21 @@
 ﻿@model MarsBurgerV1.Models.OrderButtonPartial
-
+@using MarsBurgerV1.Utility
 @using MarsBurgerV1.Models
 
 <td style="width:400px;">
     <div class="btn-group" role="group">
-        @Html.Partial("_OrderButtonPartial",
-    new OrderButtonPartial
-    {
-        Action = "Edit",
-        ButtonType = "btn-primary",
-        Glyph = "pencil",
-        Text = "Edit",
-        OrderId = Model.OrderId
-        })
+        @if (User.IsInRole(SD.AdminUserRole))
+        {
+            @Html.Partial("_OrderButtonPartial",
+        new OrderButtonPartial
+        {
+            Action = "Edit",
+            ButtonType = "btn-primary",
+            Glyph = "pencil",
+            Text = "Edit",
+            OrderId = Model.OrderId
+            })
+        }
         @Html.Partial("_OrderButtonPartial",
        new OrderButtonPartial
        {
@@ -22,14 +25,17 @@
            Text = "Details",
            OrderId = Model.OrderId
        })
-    @Html.Partial("_OrderButtonPartial",
-       new OrderButtonPartial
-       {
-           Action = "Delete",
-           ButtonType = "btn-danger",
-           Glyph = "trash",
-           Text = "Delete",
-           OrderId = Model.OrderId
-       })
-    </div>
+        @if (User.IsInRole(SD.AdminUserRole))
+        {
+            @Html.Partial("_OrderButtonPartial",
+                    new OrderButtonPartial
+                    {
+                        Action = "Delete",
+                        ButtonType = "btn-danger",
+                        Glyph = "trash",
+                        Text = "Delete",
+                        OrderId = Model.OrderId
+                    })
+        }
+        </div>
 </td>

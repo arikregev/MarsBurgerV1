@@ -1,0 +1,39 @@
+﻿@model MarsBurgerV1.Models.OrderDetailsPartial
+<div class="form-horizontal">
+    <hr />
+    <div class="form-border">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => Model.ImageUrl)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => Model.ImageUrl)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => Model.Name)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => Model.Name)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => Model.Quantity)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => Model.Quantity)
+            </dd>
+        </dl>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => Model.Price)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => Model.Price)
+            </dd>
+        </dl>
+    </div>
+    <br />
+</div>

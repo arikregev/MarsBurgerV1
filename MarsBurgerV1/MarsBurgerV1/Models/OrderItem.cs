@@ -17,6 +17,10 @@ namespace MarsBurgerV1.Models
         public virtual int ItemTypeId { get; set; }
         [EnumDataType(typeof(ItemType))]
         public ItemType ItemID { get; set; }
+        [Required]
+        public int ItemOrigID { get; set; }
+        [Required]
+        public int Quantity { get; set; }
         
     }
 }

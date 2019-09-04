@@ -13,12 +13,12 @@ namespace MarsBurgerV1.ViewModel
         public string UserID { get; set; }
         public string UserName { get; set; }
         [Required]
-        [Display(Name = "Creation Time")]
+        [Display(Name = "Order Creation Time")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0: dd MM yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime CreationTime { get; set; }
         [Required]
-        [Display(Name = "Last Update")]
+        [Display(Name = "Last Status Update")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0: dd MM yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime LastUpdate { get; set; }
