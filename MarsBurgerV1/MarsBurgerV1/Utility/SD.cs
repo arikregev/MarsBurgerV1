@@ -36,7 +36,8 @@ namespace MarsBurgerV1.Utility
             OrderReceived = 1,
             InPreperation = 2,
             OnTheWay = 3,
-            Closed = 4
+            ReadyForPickup = 4,
+            Closed = 5
         }
     }
 

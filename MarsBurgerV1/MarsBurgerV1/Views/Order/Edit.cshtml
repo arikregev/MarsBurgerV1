@@ -1,0 +1,63 @@
+﻿@model MarsBurgerV1.ViewModel.OrderVM
+@using MarsBurgerV1.Utility
+@{
+    ViewBag.Title = "Edit User";
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        <h3>Edit User</h3>
+        <hr />
+        <div class="form-border">
+            @Html.HiddenFor(m => m.OrderID)
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.OrderID)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.OrderID)
+                </dd>
+            </dl>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.UserName)
+                </dd>
+            </dl>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.CreationTime)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CreationTime)
+                </dd>
+            </dl>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.OrderStatusID)
+                </dt>
+                <dd>
+                    @Html.EnumDropDownListFor(m => m.Status, "Select Status", new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+                </dd>
+            </dl>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.LastUpdate)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.CreationTime)
+                </dd>
+            </dl>
+        </div>
+        <br />
+        <div>
+            <input type="submit" value="Save" class="btn btn-sm btn-success" />
+            @Html.Partial("_Back2ListButtonPartial")
+
+        </div>
+    </div>
+}

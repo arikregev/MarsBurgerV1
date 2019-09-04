@@ -15,12 +15,12 @@ namespace MarsBurgerV1.ViewModel
         [Required]
         [Display(Name = "Creation Time")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0: dd MM yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0: dd MM yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime CreationTime { get; set; }
         [Required]
         [Display(Name = "Last Update")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0: dd MM yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0: dd MM yyyy hh:mm tt}", ApplyFormatInEditMode = true)]
         public DateTime LastUpdate { get; set; }
         [Required]
         public virtual int OrderStatusID
@@ -37,5 +37,7 @@ namespace MarsBurgerV1.ViewModel
         [Required]
         [EnumDataType(typeof(OrderStatus))]
         public OrderStatus Status { get; set; }
+
+        public ICollection<OrderStatus> OrderStatuses { get; set; }
     }
 }

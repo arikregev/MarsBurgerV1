@@ -440,6 +440,7 @@
     <Content Include="Views\Order\Index.cshtml" />
     <Content Include="Views\Shared\_OrderButtonPartial.cshtml" />
     <Content Include="Views\Shared\_OrderTableButtonPartial.cshtml" />
+    <Content Include="Views\Order\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

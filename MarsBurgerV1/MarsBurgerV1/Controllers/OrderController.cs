@@ -14,7 +14,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace MarsBurgerV1.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class OrderController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -32,6 +32,7 @@ namespace MarsBurgerV1.Controllers
                            CreationTime = o.CreationTime,
                            LastUpdate = o.LastUpdate,
                            OrderStatusID = o.OrderStatusID,
+                           //OrderStatuses = Enum.GetValues(typeof(SD.OrderStatus)).Cast<SD.OrderStatus>().ToList(),
                            Status = o.Status
                        }).ToList();
 
@@ -156,11 +157,24 @@ namespace MarsBurgerV1.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Order order = db.orders.Find(id);
+            var uid = db.Users.ToList().Where(m => m.Id.Equals(order.UserId)).Single().UserName;
+            OrderVM o = new OrderVM
+            {
+                UserID = order.UserId,
+                UserName = uid,
+                OrderID = order.Id,
+                CreationTime = order.CreationTime,
+                LastUpdate = order.LastUpdate,
+                OrderStatusID = order.OrderStatusID,
+                //OrderStatuses = Enum.GetValues(typeof(SD.OrderStatus)).Cast<SD.OrderStatus>().ToList(),
+                Status = order.Status
+            };
             if (order == null)
             {
                 return HttpNotFound();
             }
-            return View(order);
+
+            return View(o);
         }
 
         // POST: Order/Edit/5
@@ -168,11 +182,14 @@ namespace MarsBurgerV1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,LastUpdate")] Order order)
+        public ActionResult Edit(OrderVM order)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(order).State = EntityState.Modified;
+                var orderInDB = db.orders.Single(u=>u.Id == order.OrderID);
+                orderInDB.OrderStatusID = order.OrderStatusID;
+                orderInDB.Status = order.Status;
+                orderInDB.LastUpdate = DateTime.Now;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
