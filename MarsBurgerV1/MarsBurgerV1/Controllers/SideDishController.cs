@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -30,10 +31,16 @@ namespace MarsBurgerV1.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price")] SideDish sd)
+        public ActionResult Create([Bind(Include = "Id,Name,ImageUrl,Price")] SideDish sd)
         {
             if (ModelState.IsValid)
             {
+                if (!sd.ImageUrl.Contains("~/"))
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("~/Media/").Append(sd.ImageUrl).Append(".jpg");
+                    sd.ImageUrl = sb.ToString();
+                }
                 db.sidedishes.Add(sd);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -74,11 +81,17 @@ namespace MarsBurgerV1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Price")] SideDish sd)
+        public ActionResult Edit([Bind(Include = "Id,Name,ImageUrl,Price")] SideDish sd)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(sd).State = EntityState.Modified;
+                if (!sd.ImageUrl.Contains("~/"))
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("~/Media/").Append(sd.ImageUrl).Append(".jpg");
+                    sd.ImageUrl = sb.ToString();
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

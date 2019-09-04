@@ -267,6 +267,10 @@
     <Compile Include="Migrations\201909031934076_RemoveSubOrderAddOrderItem2.Designer.cs">
       <DependentUpon>201909031934076_RemoveSubOrderAddOrderItem2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909041106166_addPhoto2ALL.cs" />
+    <Compile Include="Migrations\201909041106166_addPhoto2ALL.Designer.cs">
+      <DependentUpon>201909041106166_addPhoto2ALL.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -278,6 +282,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Meal.cs" />
     <Compile Include="Models\Order.cs" />
+    <Compile Include="Models\OrderButtonPartial.cs" />
     <Compile Include="Models\OrderItem.cs" />
     <Compile Include="Models\SideDish.cs" />
     <Compile Include="Models\Thumbnail.cs" />
@@ -349,6 +354,8 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\Error\404.html" />
+    <Content Include="Views\Error\500.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -431,6 +438,8 @@
     <Content Include="Views\Shared\EditorTemplates\Collection.cshtml" />
     <Content Include="Views\Order\Create.cshtml" />
     <Content Include="Views\Order\Index.cshtml" />
+    <Content Include="Views\Shared\_OrderButtonPartial.cshtml" />
+    <Content Include="Views\Shared\_OrderTableButtonPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -471,6 +480,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909031934076_RemoveSubOrderAddOrderItem2.resx">
       <DependentUpon>201909031934076_RemoveSubOrderAddOrderItem2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909041106166_addPhoto2ALL.resx">
+      <DependentUpon>201909041106166_addPhoto2ALL.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

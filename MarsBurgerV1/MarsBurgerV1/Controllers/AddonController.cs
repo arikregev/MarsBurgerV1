@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 
@@ -30,10 +31,16 @@ namespace MarsBurgerV1.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Price")] Addon addon)
+        public ActionResult Create([Bind(Include = "Id,Name,ImageUrl,Price")] Addon addon)
         {
             if (ModelState.IsValid)
             {
+                if (!addon.ImageUrl.Contains("~/"))
+                {
+                    StringBuilder sb = new StringBuilder();
+                    sb.Append("~/Media/").Append(addon.ImageUrl).Append(".jpg");
+                    addon.ImageUrl = sb.ToString();
+                }
                 db.addons.Add(addon);
                 db.SaveChanges();
                 return RedirectToAction("Index");

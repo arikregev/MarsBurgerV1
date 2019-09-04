@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<MarsBurgerV1.ViewModel.OrderVM>
 @using MarsBurgerV1.Utility
+@using MarsBurgerV1.Models
 @{
     ViewBag.Title = "Index";
 }
@@ -29,7 +30,7 @@ else
             @Html.DisplayNameFor(m => m.LastUpdate)
         </th>
         <th></th>
-        <th></th>
+        
     </tr>
     @foreach (var i in Model)
     {
@@ -43,16 +44,18 @@ else
                 @Html.DisplayFor(m => i.UserName)
             </td>
         }
-            <td>
-                @Html.DisplayFor(m => i.CreationTime)
-            </td>
-            <td>
-                @Html.DisplayFor(m => i.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(m => i.LastUpdate)
-            </td>
-            <td></td>
-        </tr>
+        <td>
+            @Html.DisplayFor(m => i.CreationTime)
+        </td>
+        <td>
+            @Html.DisplayFor(m => i.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(m => i.LastUpdate)
+        </td>
+        <td>
+            @Html.Partial("_OrderTableButtonPartial", new OrderButtonPartial { OrderId = i.OrderID })
+        </td>
+    </tr>
     }
 </table>

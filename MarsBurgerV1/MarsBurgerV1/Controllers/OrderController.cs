@@ -71,15 +71,6 @@ namespace MarsBurgerV1.Controllers
                              ImageURL = m.ImageUrl,
                              Quantity = 0
                          }).ToList();
-            var drinks = (from d in db.drinks
-                          select new ItemVM
-                          {
-                              Id = d.Id,
-                              Name = d.Name,
-                              Price = d.Price,
-                              Type = SD.ItemType.Drink,
-                              Quantity = 0
-                          }).ToList();
             var sidedishes = (from s in db.sidedishes
                               select new ItemVM
                               {
@@ -87,8 +78,19 @@ namespace MarsBurgerV1.Controllers
                                   Name = s.Name,
                                   Price = s.Price,
                                   Type = SD.ItemType.SideDish,
+                                  ImageURL = s.ImageUrl,
                                   Quantity = 0
                               }).ToList();
+            var drinks = (from d in db.drinks
+                          select new ItemVM
+                          {
+                              Id = d.Id,
+                              Name = d.Name,
+                              Price = d.Price,
+                              Type = SD.ItemType.Drink,
+                              ImageURL = d.ImageUrl,
+                              Quantity = 0
+                          }).ToList();
             var addons = (from a in db.addons
                           select new ItemVM
                           {
@@ -96,6 +98,7 @@ namespace MarsBurgerV1.Controllers
                               Name = a.Name,
                               Price = a.Price,
                               Type = SD.ItemType.Addon,
+                              ImageURL = a.ImageUrl,
                               Quantity = 0
                           }).ToList();
             List<ItemVM> items = new List<ItemVM>();

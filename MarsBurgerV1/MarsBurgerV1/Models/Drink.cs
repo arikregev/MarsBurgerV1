@@ -13,6 +13,9 @@ namespace MarsBurgerV1.Models
         [Required]
         public string Name { get; set; }
         [Required]
+        [DataType(DataType.ImageUrl)]
+        public string ImageUrl { get; set; }
+        [Required]
         [DataType(DataType.Currency)]
         public double Price { get; set; }
     }

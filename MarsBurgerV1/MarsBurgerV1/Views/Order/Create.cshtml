@@ -2,13 +2,25 @@
 
 @{
     ViewBag.Title = "Create";
+    var currType = Model[0].Type;
 }
+<script src="~/Scripts/jquery-3.3.1.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        //
+        $("#Clear").click(function () {
+            $("#Clear").click(function () {
+                $("#)
+                });
+        });
+    });
+</script>
 <style>
     tr td {
         vertical-align: middle;
     }
 </style>
-@using (Html.BeginForm("Create","Order", FormMethod.Post))
+@using (Html.BeginForm("Create", "Order", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
     <h3> Order:</h3>
@@ -31,107 +43,42 @@
         </tr>
         @for (var i = 0; i < Model.Count(); i++)
         {
-        <tr>
-            @Html.HiddenFor(m => Model[i].Id)
-            @Html.HiddenFor(m => Model[i].Type)
-            <td>
-                @Html.HiddenFor(m => Model[i].ImageURL)
-                @if (Model[i].ImageURL != null)
-                {
-                    <img src="@Url.Content(Model[i].ImageURL)" alt="IMAGES" height="100" width="100" />
-                }
-                @Html.ValidationMessageFor(model => Model[i].ImageURL, "", new { @class = "label-control" })
-            </td>
-            <td>
-                @Html.HiddenFor(m => Model[i].Name)
-                @Html.DisplayFor(m => Model[i].Name)
-                @Html.ValidationMessageFor(model => Model[i].Name, "", new { @class = "label-control" })
-            </td>
-            <td>
-                @Html.HiddenFor(m => Model[i].Price)
-                @Html.DisplayFor(m => Model[i].Price, new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => Model[i].Price, "", new { @class = "label-control" })
-            </td>
-            <td>
-                <a type="button" class="btn btn-danger btn-xs" href="#">
-                    <span class="glyphicon glyphicon-minus"></span>
-                </a>
-                @Html.EditorFor(model => Model[i].Quantity, new { htmlattribute = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => Model[i].Quantity, "", new { @class = "text-danger" })
-                <a type="button" class="btn btn-success btn-xs" id="plus" href="#">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </a>
-            </td>
-        </tr>
+            <tr>
+                @Html.HiddenFor(m => Model[i].Id)
+                @Html.HiddenFor(m => Model[i].Type)
+                <td>
+                    @Html.HiddenFor(m => Model[i].ImageURL)
+                    @if (Model[i].ImageURL != null)
+                    {
+                        <img src="@Url.Content(Model[i].ImageURL)" alt="IMAGES" height="100" width="100" />
+                    }
+                    @Html.ValidationMessageFor(model => Model[i].ImageURL, "", new { @class = "label-control" })
+                </td>
+                <td>
+                    @Html.HiddenFor(m => Model[i].Name)
+                    @Html.DisplayFor(m => Model[i].Name)
+                    @Html.ValidationMessageFor(model => Model[i].Name, "", new { @class = "label-control" })
+                </td>
+                <td>
+                    @Html.HiddenFor(m => Model[i].Price)
+                    @Html.DisplayFor(m => Model[i].Price, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => Model[i].Price, "", new { @class = "label-control" })
+                </td>
+                <td id="quan">
+
+                    @Html.EditorFor(model => Model[i].Quantity, new { htmlattribute = new { @class = "form-control" }, id = "q" + i })
+                    @Html.ValidationMessageFor(model => Model[i].Quantity, "", new { @class = "text-danger" })
+
+                </td>
+            </tr>
         }
     </table>
-<div class="form-group">
-    <div class="col-md-offset-2 col-md-10">
-        <button type="submit" value="Checkout" class="btn btn-primary"/>
-    </div>
-</div>
-}
-@*@using (Html.BeginForm())
-    {
-        @Html.AntiForgeryToken()
-        <h3>Order:</h3>
-        <table class="table table-condensed table-hover">
-            <tr calss="table-header">
-                <th>
-                    @Html.DisplayName("Preview")
-                </th>
-                <th>
-                    @Html.DisplayNameFor(m => m.Name)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(m => m.Price)
-                </th>
-                <th>
-                    @Html.DisplayName("Quantity")
-                </th>
-                <th></th>
-                <th></th>
-            </tr>
-            @for (var i = 0; i < Model.Count(); i++)
-            {
-                if (!currentType.Equals(Model.ElementAt(i).ItemType))
-                {
-                    <tr>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                }
-                <tr>
-                    <td>
-                        @if (Model.ElementAt(i).ImageURL != null)
-                        {
-                            <img src="@Url.Content(Model.ElementAt(i).ImageURL)" alt="IMAGES" height="100" width="100" />
-                        }
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => Model.ElementAt(i).Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(m => Model.ElementAt(i).Price)
-                    </td>
-                    <td>
-                        <a type="button" class="btn btn-danger btn-xs" href="#">
-                            <span class="glyphicon glyphicon-minus"></span>
-                        </a>
-                        @Html.EditorFor(l => lst[i].Quantity, new { htmlattribute = new { @class = "form-control" } })
-                        <a type="button" class="btn btn-success btn-xs" id="plus" href="#">
-                            <span class="glyphicon glyphicon-plus"></span>
-                        </a>
-                    </td>
-                    @{
-                        currentType = Model.ElementAt(i).ItemType;
-                    }
-                </tr>
-            }
-        </table>
-        <div>
-            <div class="col-md-offset-2 col-md-10">
-                <button type="submit" value="Create" class="btn btn-primary" />
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <div>
+                <input type="submit" value="Checkout" class="btn btn-success" />
+                <input type="reset" value="Reset Form" class="btn btn-danger" />
             </div>
         </div>
-    }*@
+    </div>
+}
