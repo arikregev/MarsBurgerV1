@@ -13,6 +13,7 @@ namespace MarsBurgerV1.Models
         public string ImageUrl { get; set; }
         public string Link { get; set; }
 
+
         public Thumbnail SetImageUrlAndTrim(string url)
         {
             ImageUrl = url.TrimStart('~','/');

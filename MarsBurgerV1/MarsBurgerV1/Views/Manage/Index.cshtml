@@ -1,4 +1,5 @@
 ﻿@model MarsBurgerV1.Models.IndexViewModel
+    @using MarsBurgerV1.Utility
 @{
     ViewBag.Title = "Manage";
 }
@@ -30,10 +31,12 @@
                     <span>Manage External Logins</span>
                 </a>
                 &nbsp;&nbsp;
+                @if(User.IsInRole(SD.EndUserRole)){ 
                 <a type="button" class="btn btn-sm btn-primary" href="@Url.Action("Index","Order")">
                     <span class="glyphicon glyphicon-list"></span>
                     <span>Your Orders</span>
                 </a>
+                }
                 <br />
                 <br />
                 <fieldset disabled>

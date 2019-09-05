@@ -1,13 +1,25 @@
 ﻿@model List<MarsBurgerV1.ViewModel.ItemVM>
 @using MarsBurgerV1.Utility
 @using MarsBurgerV1.Models
-@{
-    
-}
-<td style="width:400px;">
-    <div class="row">
-        @for (int i = 0; i < Model.Count(); i ++)
-        {
+
+<table width="500" class="table table-condensed" >
+    <tr class="table-header">
+        <th valign="middle">
+            @Html.DisplayName("Preview")
+        </th>
+        <th>
+            @Html.DisplayNameFor(m => Model[0].Name)
+        </th>
+        <th>
+            @Html.DisplayName("Amount Ordered")
+        </th>
+        <th>
+            @Html.DisplayName("SubTotal")
+        </th>
+    </tr>
+    @for (int i = 0; i < Model.Count(); i++)
+    {
+        <tr>
             @Html.Partial("_OrderDetailsPartial",
            new OrderDetailsPartial
            {
@@ -16,7 +28,22 @@
                Price = Model[i].Price,
                Quantity = Model[i].Quantity
            })
+        </tr>
+    }
+</table>
+@*<td style="width:400px;">
+        <div class="row">
+            @for (int i = 0; i < Model.Count(); i++)
+            {
+                @Html.Partial("_OrderDetailsPartial",
+               new OrderDetailsPartial
+               {
+                   Name = Model[i].Name,
+                   ImageUrl = Model[i].ImageURL,
+                   Price = Model[i].Price,
+                   Quantity = Model[i].Quantity
+               })
 
-        }
-    </div>
-</td>
+            }
+        </div>
+    </td>*@

@@ -1,5 +1,7 @@
 ﻿using MarsBurgerV1.Models;
+using MarsBurgerV1.Utility;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -17,7 +19,7 @@ namespace MarsBurgerV1.Extentions
                     db = ApplicationDbContext.Create();
                 }
                 char[] toTrim = { '~', '/' };
-                
+
                 thumbnails = (from m in db.meals
                               select new Thumbnail
                               {
@@ -27,7 +29,8 @@ namespace MarsBurgerV1.Extentions
                                   ImageUrl = m.ImageUrl,
                                   Link = "/Meal/Details/" + m.Id
                               }).ToList();
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("Catch from TE");
             }
@@ -37,7 +40,16 @@ namespace MarsBurgerV1.Extentions
             }
             if (search != null)
                 return thumbnails.Where(t => t.MealName.ToLower().Contains(search.ToLower())).OrderBy(b => b.MealName);
-            return thumbnails.OrderBy(b=>b.MealName);
+            if (HttpContext.Current.Request.Cookies.Get("interest") != null)
+            {
+                string intrest = HttpContext.Current.Request.Cookies.Get("interest").Value.ToString();
+                ThComparer th = new ThComparer(intrest);
+                thumbnails.Sort(th);
+                thumbnails.Reverse();
+                return thumbnails;
+
+            }
+            return thumbnails.OrderBy(b => b.MealName);
         }
     }
 }

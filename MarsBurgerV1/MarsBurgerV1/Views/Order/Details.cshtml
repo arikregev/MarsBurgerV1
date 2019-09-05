@@ -5,11 +5,19 @@
 @{
     ViewBag.Title = "Order Details";
 }
+<style>
+    div.partial{
+        max-width: 550px;
+    }
+    div div dl dt.dl-horizontal{
+        text-align:right;
+    }
+</style>
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="form-horizontal">
-        <h3>Edit User</h3>
+        <h3>Order Details</h3>
         <hr />
         <div class="form-border">
             @Html.HiddenFor(m => m.OrderID)
@@ -55,7 +63,7 @@
             </dl>
         </div>
         <br />
-        <div>
+        <div class="partial">
                @Html.Action("GetOrderedItems", "Order", new { orderid = Model.OrderID, userid = Model.UserID })
         </div>
         <div>

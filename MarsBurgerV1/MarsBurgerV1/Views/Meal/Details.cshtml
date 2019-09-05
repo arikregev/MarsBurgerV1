@@ -1,7 +1,21 @@
 ﻿@model MarsBurgerV1.Models.Meal
+@using System.Text
 @using MarsBurgerV1.Utility
 @{
     ViewBag.Title = "Details";
+    var cname = "interest";
+    if (Request.Cookies[cname] != null)
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append(Request.Cookies[cname].Value.ToString());
+        sb.Append(", "+Model.Id);
+        Request.Cookies[cname].Expires = DateTime.Now.AddDays(-1);
+        Response.Cookies[cname].Value = sb.ToString();
+    }
+    else
+    {
+        Response.Cookies[cname].Value = Model.Id+"," ;
+    }
 }
 
 <div>

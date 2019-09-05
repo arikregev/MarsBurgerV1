@@ -240,7 +240,7 @@ namespace MarsBurgerV1.Controllers
         [ChildActionOnly]
         public PartialViewResult GetOrderedItems(int? orderid, string userid = null)
         {
-            if(orderid > 0 && userid != null && this.User.Identity.GetUserId().Equals(userid))
+            if(orderid > 0 && userid != null && db.Users.Any(x=>x.Id == userid))
             {
                 var allItems = GetAllItems().ToList();
                 var uo = db.OrderItems.Where(m => m.OrderId == orderid).ToList();

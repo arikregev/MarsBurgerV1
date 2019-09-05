@@ -1,7 +1,11 @@
 ﻿@model MarsBurgerV1.ViewModel.ThumbnailBoxVM
+    @using MarsBurgerV1.Models
+@using MarsBurgerV1.Utility
+@{ 
 
+}
 <div class="row">
-    @if(Model.Thumbnails != null)
+    @if (Model.Thumbnails != null)
     {
         foreach (var t in Model.Thumbnails)
         {
