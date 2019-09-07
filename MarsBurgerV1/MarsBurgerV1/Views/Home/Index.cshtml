@@ -3,6 +3,24 @@
     ViewBag.Title = "Home Page";
 }
 <link rel="stylesheet" href="~/Content/homeaddons.css">
+<style>
+    #targetUL {
+        width: 110px;
+        border: 1px solid silver;
+        margin-top: 2px;
+        list-style: none;
+    }
+
+        #targetUL li {
+            margin-left: -40px;
+            border-bottom: 1px solid silver;
+            height: 26px;
+            padding-left: 5px;
+            padding-top: 8px;
+            cursor: pointer;
+        }
+</style>
+
 @using (Html.BeginForm("Index", "Home", FormMethod.Get))
 {
     <div class="jumbotron">
@@ -22,8 +40,8 @@
             </button>
         </div>
         <h4 class="pull-left">Our Spacials:</h4>
-        <div class="pull-right">
-            @Html.Editor("search", new { htmlattributes = new { @class = "form-control input-sm" } })
+        <div class="pull-right" id="targetDiv">
+            @Html.Editor("search", new { htmlattributes = new { @class = "form-control input-sm",@id="target" } })
         </div>
     </div>
     <br />
@@ -55,4 +73,48 @@
         Nam tempor pellentesque sapien ac varius.
     </div>
 </div>
+@section scripts{
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#target").keyup(function () {
+            var query = $(this).val();
+            getItems(query);
+        });
+
+        function getItems(query) {
+            $.ajax({
+                url: '@Url.Action("RemoteData", "Home")',
+                data: { "query": query },
+                type: 'POST',
+                dataType: 'json',
+                success: function (response) {
+                    if (response.Data != null) {
+                        if ($("#targetUL") != undefined) {
+                            $("#targetUL").remove();
+                        }
+                        data = response.Data;
+                        $("#targetDiv").append($("<ul id='targetUL'></ul>"));
+                        $("#targetUL").find("li").remove();
+                        $.each(data, function (i, value) {
+                            $("#targetUL").append($("<li class='targetLI' onclick='javascript:appendTextToTextBox(this)'>" + value + "</li>"));
+
+                        });
+                    }
+                    else {
+                        $("#targetUL").find("li").remove();
+                        $("#targetUL").remove();
+                    }
+                },
+                error: function (xhr, status, error) {
+                }
+            });
+        }
+    });
+    function appendTextToTextBox(e) {
+        var textToappend = e.innerText;
+        $("#target").val(textToappend);
+        $("#targetUL").remove();
+    }
+</script>
+    }
 

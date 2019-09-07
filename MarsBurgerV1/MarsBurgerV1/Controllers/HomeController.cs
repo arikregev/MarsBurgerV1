@@ -39,5 +39,18 @@ namespace MarsBurgerV1.Controllers
 
             return View();
         }
+        [HttpPost]
+        public ActionResult RemoteData(string query)
+        {
+            List<string> listData = null;
+            if (!string.IsNullOrEmpty(query))
+            {
+                using(var db = ApplicationDbContext.Create())
+                {
+                    listData = (from m in db.meals select m.Name).Where(q=>q.ToLower().Contains(query.ToLower())).ToList(); 
+                }
+            }
+            return Json(new { Data = listData });
+        }
     }
 }
