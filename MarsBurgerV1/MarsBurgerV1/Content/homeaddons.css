@@ -1,0 +1,33 @@
+﻿@font-face {
+    font-family: 'Open Sans';
+    font-style: normal;
+    font-weight: 700;
+    src: local('Open Sans Bold'), local('OpenSans-Bold'), url(http://themes.googleusercontent.com/static/fonts/opensans/v8/k3k702ZOKiLJc3WVjuplzHhCUOGz7vYGh680lGh-uXM.woff) format('woff');
+}
+
+h2 {
+    text-shadow: 3px 3px #e69e2c;
+    font-family: 'Open Sans';
+}
+
+div div button {
+    transition-timing-function: ease-in;
+    -webkit-transition: width 2s;
+    transition: width 2s;
+}
+
+    div div button:hover {
+        width: 105px;
+        transition-delay: 3s;
+    }
+
+div.par {
+    column-count: 2;
+    column-gap: 30px;
+}
+
+div.jumbotron.TT {
+    border: 0.5px solid #e69e2c;
+    padding: 10px;
+    border-radius: 15px
+}

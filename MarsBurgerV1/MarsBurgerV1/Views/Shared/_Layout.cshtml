@@ -10,6 +10,11 @@
 
 </head>
 <body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous"
+            src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=632091930532116&autoLogAppEvents=1">
+
+    </script>
     <div class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -18,7 +23,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Mars Burger", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Mars Burger", "Index", "Home", new { area = "" }, new { @class = "navbar-brand", @style = "text-shadow: 3px 3px #e69e2c" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -26,9 +31,9 @@
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
                     @if (User.IsInRole(SD.AdminUserRole))
-                        {
-                            @Html.Partial("_AdminMenuPartial")
-                        }
+                    {
+                        @Html.Partial("_AdminMenuPartial")
+                    }
                     <li class="nav nav-pills">@Html.ActionLink("Order Now!", "Create", "Order")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -39,7 +44,22 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Mars Burger 2019</p>
+            <div class="row">
+                <div class="col-md-2">
+                    <p>&copy; @DateTime.Now.Year - Mars Burger</p>
+                </div>
+                <div class="col-md-3">
+                    <nav>
+                        <div class="fb-like" data-href="https://www.facebook.com/MarsBurgerOutOfSpace" data-width="35" data-layout="button" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
+                        | @Html.ActionLink("Contact Us", "Contact", "Home") |
+                        @Html.ActionLink("About", "About", "Home")
+                    </nav>
+                </div>
+                <div class="col-xs-9">
+                    <div class="navbar-collapse collapse">
+                    </div>
+                </div>
+            </div>
         </footer>
     </div>
 

@@ -1,35 +1,54 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Contact US";
 }
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
-<div class="mapouter">
-    <div class="gmap_canvas">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d597.7616923522061!2d34.856908658117106!3d32.05705465441691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4a7a5bc130a1%3A0xfb2c36d4c291ceb6!2sHaPardes%2C%20Kiryat%20Ono!5e0!3m2!1sen!2sil!4v1567062908114!5m2!1sen!2sil" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>    
-        <style>
-        .mapouter {
-            position: relative;
-            text-align: right;
-            height: 400px;
-            width: 600px;
-        }
-        .gmap_canvas {
-            overflow: hidden;
-            background: none !important;
-            height: 400px;
-            width: 600px;
-        }
-    </style>
-     </div>
+<h3>HeadQuarters:</h3>
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v4.0&appId=632091930532116&autoLogAppEvents=1"></script>
+<div class="row" style="padding-left:25px">
+    <address>
+        The Hapardes ST<br />
+        Qiryat Ono, 55560<br />
+        Israel, Earth<br />
+        <abbr title="Phone">P:</abbr>
+        +972.1800.555.0100<br />
+        <abbr title="FaceBook Messenger: "><a href="https://www.messenger.com/t/MarsBurgerOutOfSpace">FB Chat</a></abbr>
+
+    </address>
 </div>
+<h3>Our Team:</h3>
+<div class="row" style="padding-left:25px">
+    <address>
+        <strong>Owner - Asaf Eliasim:</strong><a href="mailto:asaf@MarsBurger.com">asaf@MarsBurger.com</a><br />
+        <strong>Co-Owner - Meytar Rosenberg:</strong>   <a href="mailto:Meytar@MarsBurger.com">Meytar@MarsBurger.com</a><br />
+        <strong>CEO - Lidor Mashiah:</strong> <a href="mailto:Lidor@MarsBurger.com">Lidor@MarsBurger.com</a><br />
+        <strong>Mars Branch Manager - Arik Regev:</strong><a href="mailto:Arik@MarsBurger.com">Arik@MarsBurger.com</a>
+        <br />
+    </address>
+</div>
+<div class="row">
+    <div class="mapouter">
+        <div class="gmap_canvas">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d597.7616923522061!2d34.856908658117106!3d32.05705465441691!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x151d4a7a5bc130a1%3A0xfb2c36d4c291ceb6!2sHaPardes%2C%20Kiryat%20Ono!5e0!3m2!1sen!2sil!4v1567062908114!5m2!1sen!2sil" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+            <style>
+                .mapouter {
+                    position: relative;
+                    text-align: right;
+                    height: 400px;
+                    width: 600px;
+                }
+
+                .gmap_canvas {
+                    overflow: hidden;
+                    background: none !important;
+                    height: 500px;
+                    width: 600px;
+                }
+            </style>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
 <br />

@@ -1,5 +1,5 @@
 ﻿@model MarsBurgerV1.Models.IndexViewModel
-    @using MarsBurgerV1.Utility
+@using MarsBurgerV1.Utility
 @{
     ViewBag.Title = "Manage";
 }
@@ -31,11 +31,12 @@
                     <span>Manage External Logins</span>
                 </a>
                 &nbsp;&nbsp;
-                @if(User.IsInRole(SD.EndUserRole)){ 
-                <a type="button" class="btn btn-sm btn-primary" href="@Url.Action("Index","Order")">
-                    <span class="glyphicon glyphicon-list"></span>
-                    <span>Your Orders</span>
-                </a>
+                @if (User.IsInRole(SD.EndUserRole))
+                {
+                    <a type="button" class="btn btn-sm btn-primary" href="@Url.Action("Index","Order")">
+                        <span class="glyphicon glyphicon-list"></span>
+                        <span>Your Orders</span>
+                    </a>
                 }
                 <br />
                 <br />
@@ -75,7 +76,7 @@
         </div>
         <br />
         <div class="col-md-offset-2">
-            @Html.ActionLink("Edit","Edit","Manage",null,new { @class="btn btn-sm btn-success"})
+            @Html.ActionLink("Edit", "Edit", "Manage", null, new { @class = "btn btn-sm btn-success" })
         </div>
     </div>
 </div>
