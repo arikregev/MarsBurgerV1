@@ -23,6 +23,9 @@ namespace MarsBurgerV1.Utility
             return "";
         }
         //-----------------Button-Coloring-Login-Screen----------
+        //-----------------Search-Filters for Orders-------------
+        public const string ByOrderStatus = "byOrderStatus";
+        public const string byOrderID = "byOrderId";
         //-----------------OrderTypeEnumManagement
         public enum ItemType
         {
@@ -40,5 +43,6 @@ namespace MarsBurgerV1.Utility
             Closed = 5
         }
     }
+
 
 }

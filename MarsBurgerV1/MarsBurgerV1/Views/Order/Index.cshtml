@@ -9,6 +9,30 @@
 {<h2>Manage Orders: </h2> }
 else
 {<h2>Your Orders: </h2>}
+@using (Html.BeginForm("Index", "Order", FormMethod.Get))
+{
+    <div class="row">
+        <div class="pull-right" style="padding-right:10px;">
+            <button type="submit" value="Search" class="btn btn-sm btn-primary">
+                <span class="glyphicon glyphicon-search"></span>
+                <span>Search</span>
+            </button>
+        </div>
+        <div class="pull-right" id="targetDiv">
+            @Html.Editor("search", new { htmlattributes = new { @class = "form-control input-sm", @id = "target" } })
+        </div>
+        <div class="pull-right">
+            Show Only Open Orders:&nbsp;
+            @Html.CheckBox("unclosed")&nbsp;
+            By Order ID:&nbsp;
+            @Html.RadioButton("searchOpt", SD.byOrderID)&nbsp;
+            By Order Status:&nbsp;
+            @Html.RadioButton("searchOpt", SD.ByOrderStatus)&nbsp;
+
+        </div>
+
+    </div>
+}
 <br />
 <table class="table table-condensed table-hover">
     <tr class="table-header">
@@ -31,32 +55,32 @@ else
             @Html.DisplayNameFor(m => m.LastUpdate)
         </th>
         <th></th>
-        
+
     </tr>
     @foreach (var i in Model)
     {
-    <tr>
-        <td>
-            @Html.DisplayFor(m => i.OrderID)
-        </td>
-        @if (User.IsInRole(SD.AdminUserRole))
-        {
+        <tr>
             <td>
-                @Html.DisplayFor(m => i.UserName)
+                @Html.DisplayFor(m => i.OrderID)
             </td>
-        }
-        <td>
-            @Html.DisplayFor(m => i.CreationTime)
-        </td>
-        <td>
-            @Html.DisplayFor(m => i.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(m => i.LastUpdate)
-        </td>
-        <td>
-            @Html.Partial("_OrderTableButtonPartial", new OrderButtonPartial { OrderId = i.OrderID })
-        </td>
-    </tr>
+            @if (User.IsInRole(SD.AdminUserRole))
+            {
+                <td>
+                    @Html.DisplayFor(m => i.UserName)
+                </td>
+            }
+            <td>
+                @Html.DisplayFor(m => i.CreationTime)
+            </td>
+            <td>
+                @Html.DisplayFor(m => i.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(m => i.LastUpdate)
+            </td>
+            <td>
+                @Html.Partial("_OrderTableButtonPartial", new OrderButtonPartial { OrderId = i.OrderID })
+            </td>
+        </tr>
     }
 </table>

@@ -18,32 +18,67 @@ namespace MarsBurgerV1.Controllers
     public class OrderController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-       
+
         // GET: Order
-        public ActionResult Index()
+        public ActionResult Index(string search = null, bool unclosed = false, string searchOpt = null)
         {
             var list = (from o in db.orders
-                       join u in db.Users on o.UserId equals u.Id
-                       select new OrderVM
-                       {
-                           UserID = o.UserId,
-                           UserName = u.UserName,
-                           OrderID = o.Id,
-                           CreationTime = o.CreationTime,
-                           LastUpdate = o.LastUpdate,
-                           OrderStatusID = o.OrderStatusID,
-                           //OrderStatuses = Enum.GetValues(typeof(SD.OrderStatus)).Cast<SD.OrderStatus>().ToList(),
-                           Status = o.Status
-                       }).ToList();
+                        join u in db.Users on o.UserId equals u.Id
+                        select new OrderVM
+                        {
+                            UserID = o.UserId,
+                            UserName = u.UserName,
+                            OrderID = o.Id,
+                            CreationTime = o.CreationTime,
+                            LastUpdate = o.LastUpdate,
+                            OrderStatusID = o.OrderStatusID,
+                            //OrderStatuses = Enum.GetValues(typeof(SD.OrderStatus)).Cast<SD.OrderStatus>().ToList(),
+                            Status = o.Status
+                        }).ToList();
 
+            if (unclosed)
+            {
+                list.RemoveAll(r => r.OrderStatusID == (int)SD.OrderStatus.Closed);
+            }
+            if (!String.IsNullOrEmpty(search) && searchOpt != null)
+            {
+                List<OrderVM> filtered = new List<OrderVM>();
+                if (searchOpt.Equals(SD.byOrderID))
+                {
+                    foreach (var i in list)
+                    {
+                        if (i.OrderID.Equals(Convert.ToInt32(search)))
+                        {
+                            filtered.Add(i);
+                        }
+                    }
+                    return View(filtered);
+                }
+                if (searchOpt.Equals(SD.ByOrderStatus))
+                {
+                    var arr = Enum.GetNames(typeof(SD.OrderStatus)).Where(t=>t.ToLower().Contains(search.ToLower())).ToList();
+                    if(arr.Count() > 0)
+                    {
+                        SD.OrderStatus os = (SD.OrderStatus)Enum.Parse(typeof(SD.OrderStatus), arr.ElementAt(0));
+                        int id = (int)os;
+                        foreach (var item in list)
+                        {
+                            if (id == item.OrderStatusID)
+                                filtered.Add(item);
+                        }
+                    }
+                    return View(filtered);
+                }
+            }
             string user = User.Identity.GetUserId();
             if (User.IsInRole(SD.AdminUserRole))
             {
                 return View(list);
             }
-            return View(list.Where(u=>u.UserID.Equals(user)).ToList());
+            return View(list.Where(u => u.UserID.Equals(user)).ToList());
+            // return thumbnails.Where(t => t.MealName.ToLower().Contains(search.ToLower())).OrderBy(b => b.MealName);
         }
-        
+
         // GET: Order/Details/5
         public ActionResult Details(int? id)
         {
@@ -70,7 +105,7 @@ namespace MarsBurgerV1.Controllers
             }
             return View(o);
         }
-         public IEnumerable<ItemVM> GetAllItems()
+        public IEnumerable<ItemVM> GetAllItems()
         {
             var meals = (from m in db.meals
                          select new ItemVM
@@ -121,7 +156,7 @@ namespace MarsBurgerV1.Controllers
         }
         // GET: Order/Create
         public ActionResult Create()
-        { 
+        {
             return View(GetAllItems().ToList());
         }
         // POST: Order/Create
@@ -133,7 +168,7 @@ namespace MarsBurgerV1.Controllers
             {
                 var userID = User.Identity.GetUserId();
                 items.RemoveAll(m => m.Quantity.Equals(0));
-                if(userID != null)
+                if (userID != null)
                 {
                     Order order = new Order
                     {
@@ -202,7 +237,7 @@ namespace MarsBurgerV1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var orderInDB = db.orders.Single(u=>u.Id == order.OrderID);
+                var orderInDB = db.orders.Single(u => u.Id == order.OrderID);
                 orderInDB.OrderStatusID = order.OrderStatusID;
                 orderInDB.Status = order.Status;
                 orderInDB.LastUpdate = DateTime.Now;
@@ -240,11 +275,11 @@ namespace MarsBurgerV1.Controllers
         [ChildActionOnly]
         public PartialViewResult GetOrderedItems(int? orderid, string userid = null)
         {
-            if(orderid > 0 && userid != null && db.Users.Any(x=>x.Id == userid))
+            if (orderid > 0 && userid != null && db.Users.Any(x => x.Id == userid))
             {
                 var allItems = GetAllItems().ToList();
                 var uo = db.OrderItems.Where(m => m.OrderId == orderid).ToList();
-                foreach(var i in uo)
+                foreach (var i in uo)
                 {
                     allItems.Find(m => m.Type == (SD.ItemType)i.ItemTypeId && m.Id == i.ItemOrigID).Quantity = i.Quantity;
                 }
