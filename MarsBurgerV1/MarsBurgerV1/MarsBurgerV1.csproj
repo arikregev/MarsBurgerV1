@@ -215,6 +215,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountTypeController.cs" />
     <Compile Include="Controllers\AddonController.cs" />
+    <Compile Include="Controllers\BranchController.cs" />
     <Compile Include="Controllers\DrinkController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -278,6 +279,14 @@
     <Compile Include="Migrations\201909042047074_addItemOrigID2OrderItem.cs" />
     <Compile Include="Migrations\201909042047074_addItemOrigID2OrderItem.Designer.cs">
       <DependentUpon>201909042047074_addItemOrigID2OrderItem.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909072306205_AddBranches.cs" />
+    <Compile Include="Migrations\201909072306205_AddBranches.Designer.cs">
+      <DependentUpon>201909072306205_AddBranches.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909072320563_changeuseridfrominttostringBranches.cs" />
+    <Compile Include="Migrations\201909072320563_changeuseridfrominttostringBranches.Designer.cs">
+      <DependentUpon>201909072320563_changeuseridfrominttostringBranches.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
@@ -456,6 +465,11 @@
     <Content Include="Views\Order\Details.cshtml" />
     <Content Include="Views\Shared\_OrderDetailsPartial.cshtml" />
     <Content Include="Views\Shared\_OrderDetailCreatorPartial.cshtml" />
+    <Content Include="Views\Branch\Create.cshtml" />
+    <Content Include="Views\Branch\Delete.cshtml" />
+    <Content Include="Views\Branch\Details.cshtml" />
+    <Content Include="Views\Branch\Edit.cshtml" />
+    <Content Include="Views\Branch\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -505,6 +519,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909042047074_addItemOrigID2OrderItem.resx">
       <DependentUpon>201909042047074_addItemOrigID2OrderItem.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909072306205_AddBranches.resx">
+      <DependentUpon>201909072306205_AddBranches.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909072320563_changeuseridfrominttostringBranches.resx">
+      <DependentUpon>201909072320563_changeuseridfrominttostringBranches.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

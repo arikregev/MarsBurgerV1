@@ -14,7 +14,7 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace MarsBurgerV1.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class OrderController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

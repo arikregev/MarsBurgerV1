@@ -18,6 +18,7 @@ namespace MarsBurgerV1.Models
         public string UserId { get; set; }
         public int? AddonID { get; set; }
         public int? SideDishId { get; set; }
+        public int? BranchId { get; set; }
         public string ActionParameter
         {
             get
@@ -42,6 +43,10 @@ namespace MarsBurgerV1.Models
                 if (UserId != null && UserId.Trim().Length > 0)
                 {
                     param.Append(String.Format("{0}", UserId));
+                }
+                if (BranchId != null && BranchId > 0)
+                {
+                    param.Append(String.Format("{0}", BranchId));
                 }
                 return param.ToString();
             }
