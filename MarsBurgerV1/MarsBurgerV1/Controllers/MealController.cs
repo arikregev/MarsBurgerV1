@@ -22,6 +22,8 @@ namespace MarsBurgerV1.Controllers
         [Authorize(Roles = SD.AdminUserRole)]
         public ActionResult Index()
         {
+            var count = (from m in db.meals.GroupBy(p => p.Id) select new { count = m.Count() }).ToList();
+            ViewBag.countMeals = count.Count();
             return View(db.meals.ToList());
         }
         [Authorize(Roles = SD.AdminUserRole)]

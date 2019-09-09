@@ -1,5 +1,6 @@
 ﻿@model MarsBurgerV1.Models.Branches
 @using MarsBurgerV1.Models
+@using MarsBurgerV1.Utility
 @{
     ViewBag.Title = "Details";
 }
@@ -51,11 +52,20 @@
                 @Html.DisplayFor(model => (db.Users.Find(model.UserId).FirstName))
             </dd>
         }
+        <dt>
+            @Html.DisplayNameFor(model => model.AccessibleBranch)
+        </dt>
 
+        <dd>
+            @Html.DisplayFor(model => model.AccessibleBranch)
+        </dd>
     </dl>
 </div>
 @Html.Partial("_Back2ListButtonPartial")
-<a type="button" class="btn btn-sm btn-primary" href="@Url.Action("Edit", new { id = Model.Id })">
-    <span class="glyphicon glyphicon-pencil"></span>
-    <span>Edit User</span>
-</a>
+@if (User.IsInRole(SD.AdminUserRole))
+{
+    <a type="button" class="btn btn-sm btn-primary" href="@Url.Action("Edit", new { id = Model.Id })">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span>Edit Branch</span>
+    </a>
+}

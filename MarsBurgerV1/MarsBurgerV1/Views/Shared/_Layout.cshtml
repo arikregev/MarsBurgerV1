@@ -28,13 +28,12 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li>@Html.ActionLink("Branches", "Index", "Branch")</li>
+                    <li class="nav nav-pills">@Html.ActionLink("Order Now!", "Create", "Order")</li>
                     @if (User.IsInRole(SD.AdminUserRole))
                     {
                         @Html.Partial("_AdminMenuPartial")
                     }
-                    <li class="nav nav-pills">@Html.ActionLink("Order Now!", "Create", "Order")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -50,9 +49,13 @@
                 </div>
                 <div class="col-md-3">
                     <nav>
+                        <a type="button" class="btn btn-xs btn-default" href="@Url.Action("Contact", "Home")" >
+                            <span>Contact Us</span>
+                        </a>
+                        <a type="button" class="btn btn-xs btn-default" href="@Url.Action("About", "Home")">
+                            <span>About Us</span>
+                        </a>
                         <div class="fb-like" data-href="https://www.facebook.com/MarsBurgerOutOfSpace" data-width="35" data-layout="button" data-action="like" data-size="small" data-show-faces="true" data-share="true"></div>
-                        | @Html.ActionLink("Contact Us", "Contact", "Home") |
-                        @Html.ActionLink("About", "About", "Home")
                     </nav>
                 </div>
                 <div class="col-xs-9">

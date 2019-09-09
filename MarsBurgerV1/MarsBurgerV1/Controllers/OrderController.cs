@@ -76,7 +76,6 @@ namespace MarsBurgerV1.Controllers
                 return View(list);
             }
             return View(list.Where(u => u.UserID.Equals(user)).ToList());
-            // return thumbnails.Where(t => t.MealName.ToLower().Contains(search.ToLower())).OrderBy(b => b.MealName);
         }
 
         // GET: Order/Details/5
@@ -287,6 +286,10 @@ namespace MarsBurgerV1.Controllers
                 return PartialView("_OrderDetailCreatorPartial", allItems);
             }
             return PartialView();
+        }
+        public ActionResult Converter()
+        {
+            return View();
         }
         protected override void Dispose(bool disposing)
         {

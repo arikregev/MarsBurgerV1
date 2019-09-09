@@ -26,6 +26,9 @@ namespace MarsBurgerV1.Utility
         //-----------------Search-Filters for Orders-------------
         public const string ByOrderStatus = "byOrderStatus";
         public const string byOrderID = "byOrderId";
+        //-----------------Search-Filters for Branches-----------
+        public const string byBranchName = "byBranchName";
+        public const string byCityName = "byCityName";
         //-----------------OrderTypeEnumManagement
         public enum ItemType
         {

@@ -1,16 +1,41 @@
 ﻿@model IEnumerable<MarsBurgerV1.Models.Branches>
 @using MarsBurgerV1.Models
+@using MarsBurgerV1.Utility
 @{
     ViewBag.Title = "Index";
-   
 }
-
 <h2>Branches:</h2>
+<div class="row">
+    @using (Html.BeginForm("Index", "Branch", FormMethod.Get))
+    {
+        <div class="pull-right" style="padding-right:10px;">
+            <button type="submit" value="Search" class="btn btn-sm btn-primary">
+                <span class="glyphicon glyphicon-search"></span>
+                <span>Search</span>
+            </button>
+        </div>
 
-<a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Create")">
-    <span class="glyphicon glyphicon-plus"></span>
-    <span>Create New</span>
-</a>
+        <div class="pull-right" id="targetDiv">
+            @Html.Editor("search", new { htmlattributes = new { @class = "form-control input-sm", @id = "target" } })
+        </div>
+        <div class="pull-right">
+            Show Only Accessible Branchs:&nbsp;
+            @Html.CheckBox("Accessible")&nbsp;
+            Search By Name:&nbsp;
+            @Html.RadioButton("searchOpt", SD.byBranchName)&nbsp;
+            By City:&nbsp;
+            @Html.RadioButton("searchOpt", SD.byCityName)&nbsp;
+
+        </div>
+        if (User.IsInRole(SD.AdminUserRole))
+        {
+            <a type="button" class="btn btn-primary btn-sm" href="@Url.Action("Create")">
+                <span class="glyphicon glyphicon-plus"></span>
+                <span>Create New</span>
+            </a>
+        }
+    }
+</div>
 <table class="table">
     <tr>
         <th>
@@ -31,30 +56,35 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Address)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        @using (var db = ApplicationDbContext.Create())
-        {
+    @foreach (var item in Model)
+    {
+        <tr>
             <td>
-                @Html.DisplayFor(model => (db.Users.Find(item.UserId).FirstName))
+                @Html.DisplayFor(modelItem => item.Name)
             </td>
-        }
-        <td>
-            @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { BranchId = item.Id })
-        </td>
-    </tr>
-}
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            @using (var db = ApplicationDbContext.Create())
+            {
+                <td>
+                    @Html.DisplayFor(model => (db.Users.Find(item.UserId).FirstName))
+                </td>
+            }
+            @if (User.IsInRole(SD.AdminUserRole))
+            {
+                <td>
+                    @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { BranchId = item.Id })
+                </td>
+            }
+        </tr>
+    }
 
 </table>
+

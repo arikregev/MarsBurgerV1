@@ -222,6 +222,7 @@
     <Compile Include="Controllers\MealController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SideDishController.cs" />
+    <Compile Include="Controllers\StatisticsController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Extentions\DataRangeAttribute.cs" />
     <Compile Include="Extentions\ThumbnailExtention.cs" />
@@ -287,6 +288,10 @@
     <Compile Include="Migrations\201909072320563_changeuseridfrominttostringBranches.cs" />
     <Compile Include="Migrations\201909072320563_changeuseridfrominttostringBranches.Designer.cs">
       <DependentUpon>201909072320563_changeuseridfrominttostringBranches.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201909080826266_AddBooleanToBranch.cs" />
+    <Compile Include="Migrations\201909080826266_AddBooleanToBranch.Designer.cs">
+      <DependentUpon>201909080826266_AddBooleanToBranch.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
@@ -367,6 +372,7 @@
     <Content Include="Scripts\popper-utils.min.js" />
     <Content Include="Scripts\popper.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\StatisticsMeal.js" />
     <Content Include="Scripts\typeahead.bundle.js" />
     <Content Include="Scripts\typeahead.bundle.min.js" />
     <Content Include="Scripts\typeahead.jquery.js" />
@@ -470,6 +476,8 @@
     <Content Include="Views\Branch\Details.cshtml" />
     <Content Include="Views\Branch\Edit.cshtml" />
     <Content Include="Views\Branch\Index.cshtml" />
+    <Content Include="Views\Order\Converter.cshtml" />
+    <Content Include="Views\Statistics\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -525,6 +533,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909072320563_changeuseridfrominttostringBranches.resx">
       <DependentUpon>201909072320563_changeuseridfrominttostringBranches.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909080826266_AddBooleanToBranch.resx">
+      <DependentUpon>201909080826266_AddBooleanToBranch.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

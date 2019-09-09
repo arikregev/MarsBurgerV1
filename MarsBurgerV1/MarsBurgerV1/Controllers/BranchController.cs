@@ -1,26 +1,41 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using MarsBurgerV1.Models;
+using MarsBurgerV1.Utility;
 
 namespace MarsBurgerV1.Controllers
 {
     public class BranchController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Branch
-        public ActionResult Index()
+        public ActionResult Index(string search = null, bool Accessible = false, string searchOpt = null)
         {
-            return View(db.Branches.ToList());
+            var list = db.Branches.ToList();
+            if (Accessible)
+            {
+                list.RemoveAll(t => t.AccessibleBranch == false);
+            }
+            if(!String.IsNullOrEmpty(search) && searchOpt != null)
+            {
+                if (searchOpt.Equals(SD.byBranchName))
+                {
+                    return View(list.Where(t => t.Name.ToLower().Contains(search.ToLower())));
+                }
+                else if (searchOpt.Equals(SD.byCityName))
+                {
+                    return View(list.Where(t => t.City.ToLower().Contains(search.ToLower())));
+                }
+            }
+            return View(list);
         }
 
         // GET: Branch/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -34,7 +49,7 @@ namespace MarsBurgerV1.Controllers
             }
             return View(branches);
         }
-
+        [Authorize]
         // GET: Branch/Create
         public ActionResult Create()
         {
@@ -57,7 +72,7 @@ namespace MarsBurgerV1.Controllers
 
             return View(branches);
         }
-
+        [Authorize]
         // GET: Branch/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -88,7 +103,7 @@ namespace MarsBurgerV1.Controllers
             }
             return View(branches);
         }
-
+        [Authorize]
         // GET: Branch/Delete/5
         public ActionResult Delete(int? id)
         {

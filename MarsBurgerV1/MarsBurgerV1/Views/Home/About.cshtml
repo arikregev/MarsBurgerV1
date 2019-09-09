@@ -3,7 +3,16 @@
     ViewBag.Message = "Making Great Hamburgers on Mars Since 2019.";
 }
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<canvas id="myCanvas" width="800" height="65">
+    Your browser does not support the HTML5 canvas tag.
+</canvas>
+<script>
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    ctx.font = "20px Arial";
+    ctx.strokeText('@ViewBag.Message', 10, 50);
+</script>
+
 <style>
     aside {
         width: 40%;
