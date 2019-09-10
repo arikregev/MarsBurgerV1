@@ -18,7 +18,7 @@ namespace MarsBurgerV1.Controllers
         // GET: Statistics
         public ActionResult Index()
         {
-            var data = (from o in db.OrderItems
+            var itemVMs = (from o in db.OrderItems
                         join m in db.meals on o.ItemOrigID equals m.Id
                         where o.ItemTypeId == (int)SD.ItemType.Meal
                         select new ItemVM
@@ -30,24 +30,40 @@ namespace MarsBurgerV1.Controllers
                             Type = SD.ItemType.Meal,
                             Quantity = o.Quantity
                         }).ToList();
-            ViewBag.Data = data;
-            return View(data);
-        }
-        public JsonResult GetMealsData()
-        {
-            var data = (from o in db.OrderItems
-                        join m in db.meals on o.ItemOrigID equals m.Id
-                        where o.ItemTypeId == (int)SD.ItemType.Meal
-                        select new ItemVM
-                        {
-                            Id = m.Id,
-                            Name = m.Name,
-                            ImageURL = m.ImageUrl,
-                            Price = m.Price,
-                            Type = SD.ItemType.Meal,
-                            Quantity = o.Quantity
-                        }).ToList();
-            return this.Json(data, JsonRequestBehavior.AllowGet);
+
+            var Side = (from o in db.OrderItems join s in db.sidedishes
+                         on o.ItemOrigID equals s.Id
+                         where o.ItemTypeId == (int)SD.ItemType.SideDish
+                         select new
+                         {
+                             name = s.Name,
+                             quantity = o.Quantity
+                         }).ToList();
+            var SideG = Side.GroupBy(l => l.name)
+                .Select(cl => new
+                {
+                    name = cl.First().name,
+                    quan = cl.Sum(c=>c.quantity)
+                }).ToList();
+            List<string> namesOfItems = new List<string>();
+            List<int> quantityOfItems = new List<int>();
+            List<string> SideNames = new List<string>();
+            List<int> SideQun = new List<int>();
+            foreach (var item in itemVMs)
+            {
+                namesOfItems.Add(item.Name);
+                quantityOfItems.Add(item.Quantity);
+            }
+            foreach (var s in SideG)
+            {
+                SideNames.Add(s.name);
+                SideQun.Add(s.quan);
+            }
+            ViewBag.namesOfItems = namesOfItems;
+            ViewBag.quantityOfItems = quantityOfItems;
+            ViewBag.sideNames = SideNames;
+            ViewBag.sideQun = SideQun;
+            return View();
         }
     }
 }
