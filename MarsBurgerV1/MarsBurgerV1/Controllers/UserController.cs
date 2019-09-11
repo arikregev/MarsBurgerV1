@@ -22,7 +22,7 @@ namespace MarsBurgerV1.Controllers
             db = ApplicationDbContext.Create();
         }
         // GET: User
-        public ActionResult Index(string search = null, bool notDisabled = false, string searchOpt = null)
+        public ActionResult Index(string search = null, bool notDisabled = false, string searchOpt = null, bool Admin = false)
         {
             var users = (from u in db.Users
                         join m in db.accountTypes on u.AccountTypeId equals m.Id
@@ -42,6 +42,10 @@ namespace MarsBurgerV1.Controllers
             if (!notDisabled)
             {
                 users.RemoveAll(t => t.Disable == true);
+            }
+            if (Admin)
+            {
+                users.RemoveAll(t => t.AccountTypesId == db.accountTypes.First(s =>s.Name.Equals(SD.EndUserRole)).Id);
             }
             if(!String.IsNullOrEmpty(search) && searchOpt != null)
             {
