@@ -47,7 +47,7 @@ namespace MarsBurgerV1.Controllers
                 {
                     foreach (var i in list)
                     {
-                        if (i.OrderID.Equals(Convert.ToInt32(search)))
+                        if (i.OrderID.Equals(Convert.ToInt32(search))&& i.UserID.Equals(User.Identity.GetUserId()))
                         {
                             filtered.Add(i);
                         }
@@ -63,7 +63,7 @@ namespace MarsBurgerV1.Controllers
                         int id = (int)os;
                         foreach (var item in list)
                         {
-                            if (id == item.OrderStatusID)
+                            if (id == item.OrderStatusID && item.UserID.Equals(User.Identity.GetUserId()))
                                 filtered.Add(item);
                         }
                     }
