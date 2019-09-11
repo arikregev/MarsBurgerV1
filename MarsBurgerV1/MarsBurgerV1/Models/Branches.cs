@@ -14,5 +14,7 @@ namespace MarsBurgerV1.Models
         public string City { get; set; }
         public string UserId { get; set; }
         public bool AccessibleBranch { get; set; }
+        public bool hasParking { get; set; }
+        public bool Kosher { get; set; }
     }
 }

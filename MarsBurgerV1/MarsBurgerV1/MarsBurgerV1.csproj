@@ -293,6 +293,10 @@
     <Compile Include="Migrations\201909080826266_AddBooleanToBranch.Designer.cs">
       <DependentUpon>201909080826266_AddBooleanToBranch.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201909111541216_AddPARAMSTOBranches.cs" />
+    <Compile Include="Migrations\201909111541216_AddPARAMSTOBranches.Designer.cs">
+      <DependentUpon>201909111541216_AddPARAMSTOBranches.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountType.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -536,6 +540,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201909080826266_AddBooleanToBranch.resx">
       <DependentUpon>201909080826266_AddBooleanToBranch.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201909111541216_AddPARAMSTOBranches.resx">
+      <DependentUpon>201909111541216_AddPARAMSTOBranches.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

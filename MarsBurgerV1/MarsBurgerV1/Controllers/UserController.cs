@@ -22,9 +22,9 @@ namespace MarsBurgerV1.Controllers
             db = ApplicationDbContext.Create();
         }
         // GET: User
-        public ActionResult Index()
+        public ActionResult Index(string search = null, bool notDisabled = false, string searchOpt = null)
         {
-            var users = from u in db.Users
+            var users = (from u in db.Users
                         join m in db.accountTypes on u.AccountTypeId equals m.Id
                         select new UserVM
                         {
@@ -37,9 +37,29 @@ namespace MarsBurgerV1.Controllers
                             AccountTypesId = u.AccountTypeId,
                             AccountTypes = (ICollection<AccountType>)db.accountTypes.ToList().Where(n => n.Id.Equals(u.AccountTypeId)),
                             Disable = u.Disable
-                        };
-            var usersList = users.Where(m=>m.Disable == false).ToList();
-            return View(usersList);
+                        }).ToList();
+            //var usersList = users.Where(m=>m.Disable == false).ToList();
+            if (!notDisabled)
+            {
+                users.RemoveAll(t => t.Disable == true);
+            }
+            if(!String.IsNullOrEmpty(search) && searchOpt != null)
+            {
+                List<UserVM> uvm = new List<UserVM>();
+                if (searchOpt.Equals(SD.byFirstName))
+                {
+                    return View(users.Where(t => t.FirstName.ToLower().Contains(search.ToLower())));
+                }
+                if (searchOpt.Equals(SD.byLastName))
+                {
+                    return View(users.Where(t => t.LastName.ToLower().Contains(search.ToLower())));
+                }
+                if (searchOpt.Equals(SD.byPhone))
+                {
+                    return View(users.Where(t => t.Phone.ToLower().Contains(search.ToLower())));
+                }
+            }
+            return View(users);
         }
 
         public ActionResult Edit(string id)

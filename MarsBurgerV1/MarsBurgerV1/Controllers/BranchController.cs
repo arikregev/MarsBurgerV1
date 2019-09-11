@@ -13,12 +13,20 @@ namespace MarsBurgerV1.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
         // GET: Branch
-        public ActionResult Index(string search = null, bool Accessible = false, string searchOpt = null)
+        public ActionResult Index(string search = null, bool Accessible = false, string searchOpt = null, bool kosher = false, bool hasParking = false)
         {
             var list = db.Branches.ToList();
             if (Accessible)
             {
                 list.RemoveAll(t => t.AccessibleBranch == false);
+            }
+            if (kosher)
+            {
+                list.RemoveAll(t => t.Kosher == false);
+            }
+            if (hasParking)
+            {
+                list.RemoveAll(t => t.hasParking == false);
             }
             if(!String.IsNullOrEmpty(search) && searchOpt != null)
             {
@@ -29,6 +37,10 @@ namespace MarsBurgerV1.Controllers
                 else if (searchOpt.Equals(SD.byCityName))
                 {
                     return View(list.Where(t => t.City.ToLower().Contains(search.ToLower())));
+                }
+                else if (searchOpt.Equals(SD.byAddress))
+                {
+                    return View(list.Where(t => t.Address.ToLower().Contains(search.ToLower())));
                 }
             }
             return View(list);
@@ -61,7 +73,7 @@ namespace MarsBurgerV1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Name,Address,PhoneNumber,City,UserId")] Branches branches)
+        public ActionResult Create([Bind(Include = "Id,Name,Address,PhoneNumber,City,UserId,AccessibleBranch,hasParking,Kosher")] Branches branches)
         {
             if (ModelState.IsValid)
             {
@@ -93,7 +105,7 @@ namespace MarsBurgerV1.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Name,Address,PhoneNumber,City,UserId")] Branches branches)
+        public ActionResult Edit([Bind(Include = "Id,Name,Address,PhoneNumber,City,UserId,AccessibleBranch,hasParking,Kosher")] Branches branches)
         {
             if (ModelState.IsValid)
             {

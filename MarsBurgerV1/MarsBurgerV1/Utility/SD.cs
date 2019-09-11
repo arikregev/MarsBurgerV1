@@ -29,6 +29,11 @@ namespace MarsBurgerV1.Utility
         //-----------------Search-Filters for Branches-----------
         public const string byBranchName = "byBranchName";
         public const string byCityName = "byCityName";
+        public const string byAddress = "byAddress";
+        //-----------------Search-Filters for Branches-----------
+        public const string byFirstName = "byFirstName";
+        public const string byLastName = "byLastName";
+        public const string byPhone = "byPhone";
         //-----------------OrderTypeEnumManagement
         public enum ItemType
         {

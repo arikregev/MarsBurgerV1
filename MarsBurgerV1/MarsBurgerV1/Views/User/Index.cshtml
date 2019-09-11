@@ -1,10 +1,38 @@
 ﻿@model IEnumerable<MarsBurgerV1.ViewModel.UserVM>
 @using MarsBurgerV1.Models
+@using MarsBurgerV1.Utility
 @{
     ViewBag.Title = "Index";
 }
 <h3>Manage Users</h3>
-<br/>
+@using (Html.BeginForm("Index", "User", FormMethod.Get))
+{
+    <div class="row">
+        <div class="pull-right" style="padding-right:10px;">
+            <button type="submit" value="Search" class="btn btn-sm btn-primary">
+                <span class="glyphicon glyphicon-search"></span>
+                <span>Search</span>
+            </button>
+        </div>
+        <div class="pull-right" id="targetDiv">
+            @Html.Editor("search", new { htmlattributes = new { @class = "form-control input-sm", @id = "target" } })
+        </div>
+        <div class="pull-right">
+            Show Disabled Users:&nbsp;
+            @Html.CheckBox("notDisabled")&nbsp;
+            By First Name:&nbsp;
+            @Html.RadioButton("searchOpt", SD.byFirstName)&nbsp;
+            By Last Name:&nbsp;
+            @Html.RadioButton("searchOpt", SD.byLastName)&nbsp;
+            By Phone Number:&nbsp;
+            @Html.RadioButton("searchOpt", SD.byPhone)&nbsp;
+
+        </div>
+
+    </div>
+}
+<br />
+<br />
 <table class="table table-condensed table-hover">
     <tr class="table-header">
         <th>
@@ -25,27 +53,28 @@
         <th></th>
         <th></th>
     </tr>
-    @foreach(var i in Model){
-    <tr>
-        <td>
-            @Html.DisplayFor(m => i.FirstName)
-        </td>
-        <td>
-            @Html.DisplayFor(m => i.LastName)
-        </td>
-        <td>
-            @Html.DisplayFor(m => i.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(m => i.Phone)
-        </td>
-        <td>
-            @Html.DisplayFor(m => i.BirthDate)
-        </td>
-        <td>
-            @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { UserId = i.Id })
-        </td>
-    </tr>
+    @foreach (var i in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(m => i.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(m => i.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(m => i.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(m => i.Phone)
+            </td>
+            <td>
+                @Html.DisplayFor(m => i.BirthDate)
+            </td>
+            <td>
+                @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { UserId = i.Id })
+            </td>
+        </tr>
     }
 
 </table>

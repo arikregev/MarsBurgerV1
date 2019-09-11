@@ -19,12 +19,18 @@
             @Html.Editor("search", new { htmlattributes = new { @class = "form-control input-sm", @id = "target" } })
         </div>
         <div class="pull-right">
-            Show Only Accessible Branchs:&nbsp;
+            Kosher:&nbsp;
+            @Html.CheckBox("kosher")&nbsp;
+            Has Parking:&nbsp;
+            @Html.CheckBox("hasParking")&nbsp;
+            Accessible Branchs:&nbsp;
             @Html.CheckBox("Accessible")&nbsp;
             Search By Name:&nbsp;
             @Html.RadioButton("searchOpt", SD.byBranchName)&nbsp;
             By City:&nbsp;
             @Html.RadioButton("searchOpt", SD.byCityName)&nbsp;
+            By Address:&nbsp;
+            @Html.RadioButton("searchOpt", SD.byAddress)&nbsp;
 
         </div>
         if (User.IsInRole(SD.AdminUserRole))
@@ -53,37 +59,55 @@
         <th>
             @Html.DisplayName("Manager Name")
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccessibleBranch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.hasParking)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model=>model.Kosher)
+        </th>
         <th></th>
     </tr>
 
     @foreach (var item in Model)
     {
-        <tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Address)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.City)
+        </td>
+        @using (var db = ApplicationDbContext.Create())
+        {
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(model => (db.Users.Find(item.UserId).FirstName))
             </td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.AccessibleBranch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.hasParking)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kosher)
+        </td>
+        @if (User.IsInRole(SD.AdminUserRole))
+        {
             <td>
-                @Html.DisplayFor(modelItem => item.Address)
+                @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { BranchId = item.Id })
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.PhoneNumber)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.City)
-            </td>
-            @using (var db = ApplicationDbContext.Create())
-            {
-                <td>
-                    @Html.DisplayFor(model => (db.Users.Find(item.UserId).FirstName))
-                </td>
-            }
-            @if (User.IsInRole(SD.AdminUserRole))
-            {
-                <td>
-                    @Html.Partial("_TableButtonPartial", new IndividualButtonPartial { BranchId = item.Id })
-                </td>
-            }
-        </tr>
+        }
+    </tr>
     }
 
 </table>
