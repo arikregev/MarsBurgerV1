@@ -1,0 +1,43 @@
+﻿@model MarsBurgerV1.Models.Order
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+<div class="form-border">
+    <fieldset disabled>
+        <div class="row" style="padding-bottom:5px; padding-top:5px;">
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.Id, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Id, new { @class = "control-label" })
+            </div>
+        </div>
+        <div class="row" style="padding-bottom:5px; padding-top:5px;">
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.OrderStatusID, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.OrderStatusID, new { @class = "control-label" })
+            </div>
+        </div>
+        <div class="row" style="padding-bottom:5px; padding-top:5px;">
+            <div class="col-md-2">
+                @Html.LabelFor(m => m.Status, htmlAttributes: new { @class = "control-label" })
+            </div>
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.Status, new { @class = "control-label" })
+            </div>
+        </div>
+
+    </fieldset>
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div>
+            @Html.Partial("_Back2ListButtonPartial")
+            <input type="submit" value="Delete" class="btn btn-sm btn-danger" />
+        </div>
+    }
