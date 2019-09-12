@@ -30,7 +30,11 @@ namespace MarsBurgerV1.Controllers
                             Type = SD.ItemType.Meal,
                             Quantity = o.Quantity
                         }).ToList();
-
+            var Items = itemVMs.GroupBy(l => l.Id).Select(cl => new
+            {
+                name = cl.First().Name,
+                quan = cl.Sum(c => c.Quantity)
+            }).ToList();
             var Side = (from o in db.OrderItems join s in db.sidedishes
                          on o.ItemOrigID equals s.Id
                          where o.ItemTypeId == (int)SD.ItemType.SideDish
@@ -49,10 +53,10 @@ namespace MarsBurgerV1.Controllers
             List<int> quantityOfItems = new List<int>();
             List<string> SideNames = new List<string>();
             List<int> SideQun = new List<int>();
-            foreach (var item in itemVMs)
+            foreach (var i in Items)
             {
-                namesOfItems.Add(item.Name);
-                quantityOfItems.Add(item.Quantity);
+                namesOfItems.Add(i.name);
+                quantityOfItems.Add(i.quan);
             }
             foreach (var s in SideG)
             {
